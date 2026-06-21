@@ -45,47 +45,37 @@
             font-weight: 600;
             color: #615043;
             margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
-        /* 膚質選擇鈕美化 */
         .grid-options {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            display: block;
             margin-bottom: 24px;
         }
         .option-btn {
+            width: 100%;
+            display: block;
             background: #fdfcfb;
             border: 1px solid #eaddd3;
             border-radius: 14px;
             padding: 16px 8px;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             color: #5c524a;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
         }
         .option-btn:active, .option-btn.active {
             background: #8a6d53;
             border-color: #8a6d53;
             color: #ffffff;
             box-shadow: 0 6px 14px rgba(138, 109, 83, 0.25);
-            transform: translateY(-2px);
         }
-        /* 結果分析區塊 */
         #result-panel {
             display: none;
             border-top: 1px solid #f2ece6;
             margin-top: 24px;
             padding-top: 24px;
-            animation: slideUp 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         .analysis-badge {
             background: #f7ece4;
@@ -106,7 +96,6 @@
             border-radius: 12px;
             border-left: 3px solid #b18764;
         }
-        /* 成分圖表卡片 */
         .ingredient-card {
             background: #ffffff;
             border: 1px solid #eee7e1;
@@ -117,7 +106,6 @@
         .ing-row {
             margin-bottom: 14px;
         }
-        .ing-row:last-child { margin-bottom: 0; }
         .ing-meta {
             display: flex;
             justify-content: space-between;
@@ -129,17 +117,16 @@
         .ing-percent { color: #b18764; }
         .progress-bg {
             background: #eedfd3;
-            height: 6px;
-            border-radius: 3px;
+            height: 8px;
+            border-radius: 4px;
             overflow: hidden;
         }
         .progress-bar {
-            background: linear-gradient(90deg, #b18764, #8a6d53);
+            background: #8a6d53;
             height: 100%;
             width: 0%;
-            transition: width 0.8s ease-out;
+            transition: width 0.5s ease-out;
         }
-        /* 推薦商品結構 */
         .product-box {
             display: flex;
             align-items: center;
@@ -158,7 +145,6 @@
             align-items: center;
             justify-content: center;
             font-size: 36px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
         .prod-detail { flex: 1; }
         .prod-title { font-weight: 700; font-size: 15px; color: #333; margin-bottom: 4px; }
@@ -178,7 +164,6 @@
             margin-top: 16px;
             box-shadow: 0 6px 16px rgba(138, 109, 83, 0.2);
         }
-        .cta-button:active { background: #6e553f; }
     </style>
 </head>
 <body>
@@ -189,7 +174,6 @@
             <h2 class="main-title">AI 精準配方檢測</h2>
         </div>
 
-        <!-- 步驟 1：選擇膚質 -->
         <div class="section-label">📌 步驟 1：請選擇您的核心膚質</div>
         <div class="grid-options">
             <button onclick="analyzeSkin(this, 'oily')" class="option-btn">🧪 油性肌</button>
@@ -197,13 +181,11 @@
             <button onclick="analyzeSkin(this, 'mix')" class="option-btn">⚖️ 混合肌</button>
         </div>
 
-        <!-- 步驟 2：動態分析面板 -->
         <div id="result-panel">
             <div class="section-label">🔬 步驟 2：專屬配方與活性成分分析</div>
             <div class="analysis-badge" id="skin-tag"></div>
             <div class="diagnosis-text" id="skin-diag"></div>
 
-            <!-- 成分配比分析圖 -->
             <div class="ingredient-card">
                 <div style="font-size: 12px; font-weight: 700; color: #8a6d53; margin-bottom: 12px;">📊 核心活性成分配比（黃金比例）</div>
                 
@@ -217,10 +199,9 @@
                 </div>
             </div>
 
-            <!-- 建議體驗商品 -->
             <div class="section-label">✨ 步驟 3：為您定制的修護對策</div>
             <div class="product-box">
-                <div class="prod-image" id="prod-img">🧴</div>
+                <div class="prod-image" id="prod-img"></div>
                 <div class="prod-detail">
                     <div class="prod-title" id="prod-name"></div>
                     <div class="prod-price" id="prod-price"></div>
@@ -233,25 +214,19 @@
 
     <script>
     function analyzeSkin(element, type) {
-        // 切換按鈕樣式
-        document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('active'));
+        // 1. 切換按鈕 active 樣式
+        var buttons = document.querySelectorAll('.option-btn');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('active');
+        }
         element.classList.add('active');
 
-        // 抓取 DOM 元素
-        const panel = document.getElementById('result-panel');
-        const tag = document.getElementById('skin-tag');
-        const diag = document.getElementById('skin-diag');
-        const ing1N = document.getElementById('ing1-name'); const ing1V = document.getElementById('ing1-val'); const bar1 = document.getElementById('bar1');
-        const ing2N = document.getElementById('ing2-name'); const ing2V = document.getElementById('ing2-val'); const bar2 = document.getElementById('bar2');
-        const pName = document.getElementById('prod-name');
-        const pPrice = document.getElementById('prod-price');
-        const pImg = document.getElementById('prod-img');
-        const pLink = document.getElementById('prod-link');
-
+        // 2. 顯示結果面板
+        var panel = document.getElementById('result-panel');
         panel.style.display = 'block';
 
-        // 資料庫：不同膚質對應不同分析與產品
-        const data = {
+        // 3. 定義膚質資料庫
+        var data = {
             oily: {
                 tag: "油性肌膚診斷：油脂分泌過剩、毛孔粗大",
                 diag: "您的肌膚屏障目前處於皮脂腺高度活躍狀態。若盲目控油會導致內乾外油。科學配方建議引入【水楊酸】溶解深層毛孔頑垢，並搭配【茶樹萃取】進行底層調理。",
@@ -270,3 +245,33 @@
             },
             mix: {
                 tag: "混合性肌膚診斷：T字油、兩頰乾、水油失衡",
+                diag: "您的肌膚處於不穩定的「分區矛盾狀態」。針對這種膚質，核心策略是分區治理與屏障穩定。建議使用【菸鹼醯胺 (Vitamin B3)】同時平衡皮脂並強化兩頰鎖水力，搭配【胜肽】提升緊緻度。",
+                ing1: "菸鹼醯胺 (B3)", ing1Val: "4.0%", bar1W: "80%",
+                ing2: "多重複合胜肽", ing2Val: "2.0%", bar2W: "70%",
+                prod: "玫瑰輕感粉底妝前乳", price: "$680 <del>$980</del>", img: "🌹",
+                link: "https://jourdeness.com"
+            }
+        };
+
+        var res = data[type];
+
+        // 4. 填入內容
+        document.getElementById('skin-tag').innerText = res.tag;
+        document.getElementById('skin-diag').innerText = res.diag;
+        document.getElementById('ing1-name').innerText = res.ing1;
+        document.getElementById('ing1-val').innerText = res.ing1Val;
+        document.getElementById('ing2-name').innerText = res.ing2;
+        document.getElementById('ing2-val').innerText = res.ing2Val;
+        document.getElementById('prod-name').innerText = res.prod;
+        document.getElementById('prod-price').innerHTML = res.price;
+        document.getElementById('prod-img').innerText = res.img;
+        document.getElementById('prod-link').href = res.link;
+
+        // 5. 觸發進度條動畫
+        var b1 = document.getElementById('bar1');
+        var b2 = document.getElementById('bar2');
+        b1.style.width = '0%';
+        b2.style.width = '0%';
+        setTimeout(function() {
+            b1.style.width = res.bar1W;
+            b2.style.width = res.bar2W;
