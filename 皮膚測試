@@ -1,65 +1,76 @@
-<!-- 膚況檢測推薦區塊 -->
-<div style="font-family: sans-serif; padding: 20px; max-width: 500px; margin: 0 auto; background: #fffaf7; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-    <h3 style="text-align: center; color: #8a6d53; margin-bottom: 5px;">🔬 30秒命定成分測驗</h3>
-    <p style="text-align: center; font-size: 14px; color: #666; margin-top: 0;">點擊你目前的肌膚困擾，為你解密所需成分：</p>
-    
-    <!-- 膚況按鈕組 -->
-    <div style="display: flex; gap: 8px; justify-content: space-between; margin-bottom: 20px;">
-        <button onclick="showResult('dry')" style="flex: 1; padding: 10px 5px; border: 1px solid #d4bda7; background: #fff; border-radius: 8px; cursor: pointer; font-weight: bold; color: #555;">🍂 脫皮泛紅</button>
-        <button onclick="showResult('dark')" style="flex: 1; padding: 10px 5px; border: 1px solid #d4bda7; background: #fff; border-radius: 8px; cursor: pointer; font-weight: bold; color: #555;">🌚 熬夜暗沉</button>
-        <button onclick="showResult('lines')" style="flex: 1; padding: 10px 5px; border: 1px solid #d4bda7; background: #fff; border-radius: 8px; cursor: pointer; font-weight: bold; color: #555;">👵 鬆弛細紋</button>
-    </div>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>佐登妮絲 膚況檢測推薦</title>
+</head>
+<body style="background-color: #f7f7f7; padding: 20px;">
 
-    <!-- 推薦結果顯示區域 (預設隱藏) -->
-    <div id="recommend-box" style="display: none; background: #fff; border: 1px solid #eaddd3; padding: 15px; border-radius: 8px;">
-        <h4 style="margin: 0 0 10px 0; color: #b18764;" id="res-title"></h4>
-        <p style="font-size: 14px; color: #444; line-height: 1.5; margin-bottom: 15px;" id="res-desc"></p>
+    <!-- 膚況檢測推薦區塊 -->
+    <div style="font-family: sans-serif; padding: 20px; max-width: 500px; margin: 0 auto; background: #fffaf7; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+        <h3 style="text-align: center; color: #8a6d53; margin-bottom: 5px;">🔬 30秒命定成分測驗</h3>
+        <p style="text-align: center; font-size: 14px; color: #666; margin-top: 0;">點擊你目前的肌膚困擾，為你解密所需成分：</p>
         
-        <!-- 推薦產品小卡 -->
-        <div style="display: flex; align-items: center; gap: 12px; border-top: 1px dashed #eee; padding-top: 15px;">
-            <div style="width: 60px; height: 60px; background: #f0f0f0; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 24px;" id="res-img">🧴</div>
-            <div style="flex: 1;">
-                <div style="font-weight: bold; font-size: 15px;" id="res-prod-name"></div>
-                <div style="color: #e44d26; font-weight: bold; margin-top: 4px;" id="res-price"></div>
+        <!-- 膚況按鈕組 -->
+        <div style="display: flex; gap: 8px; justify-content: space-between; margin-bottom: 20px;">
+            <button onclick="showResult('dry')" style="flex: 1; padding: 10px 5px; border: 1px solid #d4bda7; background: #fff; border-radius: 8px; cursor: pointer; font-weight: bold; color: #555;">🍂 脫皮泛紅</button>
+            <button onclick="showResult('dark')" style="flex: 1; padding: 10px 5px; border: 1px solid #d4bda7; background: #fff; border-radius: 8px; cursor: pointer; font-weight: bold; color: #555;">🌚 熬夜暗沉</button>
+            <button onclick="showResult('lines')" style="flex: 1; padding: 10px 5px; border: 1px solid #d4bda7; background: #fff; border-radius: 8px; cursor: pointer; font-weight: bold; color: #555;">👵 鬆弛細紋</button>
+        </div>
+
+        <!-- 推薦結果顯示區域 (預設隱藏) -->
+        <div id="recommend-box" style="display: none; background: #fff; border: 1px solid #eaddd3; padding: 15px; border-radius: 8px;">
+            <h4 style="margin: 0 0 10px 0; color: #b18764;" id="res-title"></h4>
+            <p style="font-size: 14px; color: #444; line-height: 1.5; margin-bottom: 15px;" id="res-desc"></p>
+            
+            <!-- 推薦產品小卡 -->
+            <div style="display: flex; align-items: center; gap: 12px; border-top: 1px dashed #eee; padding-top: 15px;">
+                <div style="width: 60px; height: 60px; background: #f0f0f0; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 24px;" id="res-img">🧴</div>
+                <div style="flex: 1;">
+                    <div style="font-weight: bold; font-size: 15px;" id="res-prod-name"></div>
+                    <div style="color: #e44d26; font-weight: bold; margin-top: 4px;" id="res-price"></div>
+                </div>
+                <a href="#" id="res-link" style="background: #b18764; color: #fff; text-decoration: none; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: bold;">一鍵搶購</a>
             </div>
-            <a href="#" id="res-link" style="background: #b18764; color: #fff; text-decoration: none; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: bold;">一鍵搶購</a>
         </div>
     </div>
-</div>
 
-<script>
-function showResult(type) {
-    const box = document.getElementById('recommend-box');
-    const title = document.getElementById('res-title');
-    const desc = document.getElementById('res-desc');
-    const prodName = document.getElementById('res-prod-name');
-    const price = document.getElementById('res-price');
-    const img = document.getElementById('res-img');
-    const link = document.getElementById('res-link');
-    
-    box.style.display = 'block';
-    
-    if (type === 'dry') {
-        title.innerHTML = "💡 專家成分建議：【秘魯龍血萃取 + 玻尿酸】";
-        desc.innerHTML = "換季脫皮代表肌膚屏障受損。神級成分「龍血萃取」具有超越一般保養品的修復力，能快速舒緩泛紅，搭配玻尿酸深度補水，才能鎖住水分！";
-        prodName.innerHTML = "龍血求麗精華 30ml";
-        price.innerHTML = "活動特價 $1,190";
-        img.innerHTML = "🩸";
-        link.href = "#prod-dragon"; // 可連結到你網頁下方龍血精華的錨點或購買表單
-    } else if (type === 'dark') {
-        title.innerHTML = "💡 專家成分建議：【傳明酸 + 熊果素】";
-        desc.innerHTML = "熬夜引發的暗沉，需要高效「傳明酸」在黑色素形成的源頭進行阻斷。搭配高濃度保濕面膜，利用密封原理強迫肌膚吸收，15分鐘就能重現淨白發光肌！";
-        prodName.innerHTML = "極光白高保濕面膜 (5入)";
-        price.innerHTML = "特惠價 $399";
-        img.innerHTML = "🎭";
-        link.href = "#prod-mask";
-    } else if (type === 'lines') {
-        title.innerHTML = "💡 專家成分建議：【大馬士革玫瑰精粹 + 胜肽】";
-        desc.innerHTML = "膠原蛋白流失會導致毛孔粗大與細紋。玫瑰精粹能給予肌膚深度滋養，並散發天然療癒香氣；結合胜肽技術，能填補肌膚紋理，讓日常底妝極致服貼、不卡粉。";
-        prodName.innerHTML = "玫瑰輕感妝前乳";
-        price.innerHTML = "特惠價 $680";
-        img.innerHTML = "🌹";
-        link.href = "#prod-rose";
+    <script>
+    function showResult(type) {
+        const box = document.getElementById('recommend-box');
+        const title = document.getElementById('res-title');
+        const desc = document.getElementById('res-desc');
+        const prodName = document.getElementById('res-prod-name');
+        const price = document.getElementById('res-price');
+        const img = document.getElementById('res-img');
+        const link = document.getElementById('res-link');
+        
+        box.style.display = 'block';
+        
+        if (type === 'dry') {
+            title.innerHTML = "💡 專家成分建議：【秘魯龍血萃取 + 玻尿酸】";
+            desc.innerHTML = "換季脫皮代表肌膚屏障受損。神級成分「龍血萃取」具有超越一般保養品的修復力，能快速舒緩泛紅，搭配玻尿酸深度補水，才能鎖住水分！";
+            prodName.innerHTML = "龍血求麗精華 30ml";
+            price.innerHTML = "活動特價 $1,190";
+            img.innerHTML = "🩸";
+            link.href = "#prod-dragon";
+        } else if (type === 'dark') {
+            title.innerHTML = "💡 專家成分建議：【傳明酸 + 熊果素】";
+            desc.innerHTML = "熬夜引發的暗沉，需要高效「傳明酸」在黑色素形成的源頭進行阻斷。搭配高濃度保濕面膜，利用密封原理強迫肌膚吸收，15分鐘就能重現淨白發光肌！";
+            prodName.innerHTML = "極光白高保濕面膜 (5入)";
+            price.innerHTML = "特惠價 $399";
+            img.innerHTML = "🎭";
+            link.href = "#prod-mask";
+        } else if (type === 'lines') {
+            title.innerHTML = "💡 專家成分建議：【大馬士革玫瑰精粹 + 胜肽】";
+            desc.innerHTML = "膠原蛋白流失會導致毛孔粗大與細紋。玫瑰精粹能給予肌膚深度滋養，並散發天然療癒香氣；結合胜肽技術，能填補肌膚紋理，讓日常底妝極致服貼、不卡粉。";
+            prodName.innerHTML = "玫瑰輕感妝前乳";
+            price.innerHTML = "特惠價 $680";
+            img.innerHTML = "🌹";
+            link.href = "#prod-rose";
+        }
     }
-}
-</script>
+    </script>
+</body>
+</html>
