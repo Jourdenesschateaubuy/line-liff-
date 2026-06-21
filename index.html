@@ -1,277 +1,369 @@
 <!DOCTYPE html>
+
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>佐登妮絲 🔬 智能精準膚況檢測系統</title>
-    <style>
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body {
-            background-color: #fcf9f6;
-            margin: 0;
-            padding: 20px 16px;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: #2b2b2b;
-            line-height: 1.5;
-        }
-        .app-card {
-            max-width: 480px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 24px;
-            padding: 28px 20px;
-            box-shadow: 0 12px 32px rgba(163, 145, 130, 0.12);
-        }
-        .brand-header {
-            text-align: center;
-            margin-bottom: 28px;
-        }
-        .brand-name {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #b18764;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-        .main-title {
-            font-size: 22px;
-            color: #4a3c31;
-            margin: 0;
-            font-weight: 700;
-        }
-        .section-label {
-            font-size: 14px;
-            font-weight: 600;
-            color: #615043;
-            margin-bottom: 12px;
-        }
-        .grid-options {
-            display: block;
-            margin-bottom: 24px;
-        }
-        .option-btn {
-            width: 100%;
-            display: block;
-            background: #fdfcfb;
-            border: 1px solid #eaddd3;
-            border-radius: 14px;
-            padding: 16px 8px;
-            font-size: 15px;
-            font-weight: 600;
-            color: #5c524a;
-            cursor: pointer;
-            text-align: center;
-            margin-bottom: 10px;
-            transition: all 0.2s ease;
-        }
-        .option-btn:active, .option-btn.active {
-            background: #8a6d53;
-            border-color: #8a6d53;
-            color: #ffffff;
-            box-shadow: 0 6px 14px rgba(138, 109, 83, 0.25);
-        }
-        #result-panel {
-            display: none;
-            border-top: 1px solid #f2ece6;
-            margin-top: 24px;
-            padding-top: 24px;
-        }
-        .analysis-badge {
-            background: #f7ece4;
-            color: #8a6d53;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 6px;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
-        .diagnosis-text {
-            font-size: 14px;
-            color: #555555;
-            margin-bottom: 20px;
-            background: #faf7f4;
-            padding: 14px;
-            border-radius: 12px;
-            border-left: 3px solid #b18764;
-        }
-        .ingredient-card {
-            background: #ffffff;
-            border: 1px solid #eee7e1;
-            border-radius: 18px;
-            padding: 16px;
-            margin-bottom: 24px;
-        }
-        .ing-row {
-            margin-bottom: 14px;
-        }
-        .ing-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-        .ing-name { color: #4a3c31; }
-        .ing-percent { color: #b18764; }
-        .progress-bg {
-            background: #eedfd3;
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .progress-bar {
-            background: #8a6d53;
-            height: 100%;
-            width: 0%;
-            transition: width 0.5s ease-out;
-        }
-        .product-box {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            background: #fdfbf9;
-            padding: 14px;
-            border-radius: 16px;
-            border: 1px solid #f2ece6;
-        }
-        .prod-image {
-            width: 76px;
-            height: 76px;
-            background: #ffffff;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-        }
-        .prod-detail { flex: 1; }
-        .prod-title { font-weight: 700; font-size: 15px; color: #333; margin-bottom: 4px; }
-        .prod-price { color: #d9411e; font-weight: 700; font-size: 16px; }
-        .prod-price del { font-size: 11px; color: #aaa; margin-left: 6px; font-weight: 400; }
-        .cta-button {
-            display: block;
-            width: 100%;
-            background: #8a6d53;
-            color: #ffffff;
-            text-align: center;
-            text-decoration: none;
-            padding: 15px;
-            border-radius: 14px;
-            font-size: 15px;
-            font-weight: 700;
-            margin-top: 16px;
-            box-shadow: 0 6px 16px rgba(138, 109, 83, 0.2);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佐登妮絲 AI 精準膚況檢測</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+body{
+    background:#fcf9f6;
+    padding:20px;
+}
+
+.app-card{
+    max-width:480px;
+    margin:auto;
+    background:#fff;
+    border-radius:24px;
+    padding:24px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.brand-header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.brand-name{
+    color:#b18764;
+    font-size:12px;
+    letter-spacing:3px;
+    margin-bottom:8px;
+}
+
+.main-title{
+    color:#4a3c31;
+    font-size:24px;
+}
+
+.section-label{
+    font-size:15px;
+    font-weight:700;
+    margin-bottom:12px;
+    color:#5a4c42;
+}
+
+.option-btn{
+    width:100%;
+    border:none;
+    background:#faf7f4;
+    border:1px solid #eadfd5;
+    border-radius:14px;
+    padding:16px;
+    margin-bottom:10px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:.2s;
+}
+
+.option-btn:hover{
+    background:#f2ebe5;
+}
+
+.option-btn.active{
+    background:#8a6d53;
+    color:#fff;
+    border-color:#8a6d53;
+}
+
+#result-panel{
+    display:none;
+    margin-top:25px;
+    border-top:1px solid #eee;
+    padding-top:25px;
+}
+
+.analysis-badge{
+    display:inline-block;
+    background:#f7ece4;
+    color:#8a6d53;
+    padding:6px 10px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.diagnosis-text{
+    background:#faf7f4;
+    padding:14px;
+    border-radius:12px;
+    font-size:14px;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.ingredient-card{
+    border:1px solid #eee7e1;
+    border-radius:16px;
+    padding:16px;
+    margin-bottom:20px;
+}
+
+.ing-row{
+    margin-bottom:15px;
+}
+
+.ing-meta{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:6px;
+    font-size:13px;
+}
+
+.progress-bg{
+    background:#eee0d5;
+    height:8px;
+    border-radius:99px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0;
+    background:#8a6d53;
+    transition:.8s;
+}
+
+.product-box{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    background:#faf7f4;
+    border-radius:16px;
+    padding:15px;
+}
+
+.prod-image{
+    width:70px;
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    background:white;
+    border-radius:12px;
+}
+
+.prod-detail{
+    flex:1;
+}
+
+.prod-title{
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.prod-price{
+    color:#d84a23;
+    font-weight:700;
+}
+
+.cta-button{
+    display:block;
+    text-align:center;
+    background:#8a6d53;
+    color:#fff;
+    text-decoration:none;
+    padding:15px;
+    border-radius:14px;
+    margin-top:16px;
+    font-weight:700;
+}
+</style>
+
 </head>
+
 <body>
 
-    <div class="app-card">
-        <div class="brand-header">
-            <div class="brand-name">JOURDENESS LAB</div>
-            <h2 class="main-title">AI 精準配方檢測</h2>
-        </div>
+<div class="app-card">
 
-        <div class="section-label">📌 步驟 1：請選擇您的核心膚質</div>
-        <div class="grid-options">
-            <button onclick="analyzeSkin(this, 'oily')" class="option-btn">🧪 油性肌</button>
-            <button onclick="analyzeSkin(this, 'dry')" class="option-btn">🍂 乾性肌</button>
-            <button onclick="analyzeSkin(this, 'mix')" class="option-btn">⚖️ 混合肌</button>
-        </div>
+```
+<div class="brand-header">
+    <div class="brand-name">JOURDENESS LAB</div>
+    <h2 class="main-title">AI 精準膚況檢測</h2>
+</div>
 
-        <div id="result-panel">
-            <div class="section-label">🔬 步驟 2：專屬配方與活性成分分析</div>
-            <div class="analysis-badge" id="skin-tag"></div>
-            <div class="diagnosis-text" id="skin-diag"></div>
+<div class="section-label">
+    📌 請選擇您的核心膚質
+</div>
 
-            <div class="ingredient-card">
-                <div style="font-size: 12px; font-weight: 700; color: #8a6d53; margin-bottom: 12px;">📊 核心活性成分配比（黃金比例）</div>
-                
-                <div class="ing-row">
-                    <div class="ing-meta"><span class="ing-name" id="ing1-name"></span><span class="ing-percent" id="ing1-val"></span></div>
-                    <div class="progress-bg"><div class="progress-bar" id="bar1"></div></div>
-                </div>
-                <div class="ing-row">
-                    <div class="ing-meta"><span class="ing-name" id="ing2-name"></span><span class="ing-percent" id="ing2-val"></span></div>
-                    <div class="progress-bg"><div class="progress-bar" id="bar2"></div></div>
-                </div>
-            </div>
+<button class="option-btn" onclick="analyzeSkin(this,'oily')">
+    🧪 油性肌
+</button>
 
-            <div class="section-label">✨ 步驟 3：為您定制的修護對策</div>
-            <div class="product-box">
-                <div class="prod-image" id="prod-img"></div>
-                <div class="prod-detail">
-                    <div class="prod-title" id="prod-name"></div>
-                    <div class="prod-price" id="prod-price"></div>
-                </div>
-            </div>
-            
-            <a href="https://jourdeness.com" id="prod-link" target="_blank" class="cta-button">領取專屬尊榮體驗組</a>
-        </div>
+<button class="option-btn" onclick="analyzeSkin(this,'dry')">
+    🍂 乾性肌
+</button>
+
+<button class="option-btn" onclick="analyzeSkin(this,'mix')">
+    ⚖️ 混合肌
+</button>
+
+<div id="result-panel">
+
+    <div class="section-label">
+        🔬 AI分析結果
     </div>
 
-    <script>
-    function analyzeSkin(element, type) {
-        // 1. 切換按鈕 active 樣式
-        var buttons = document.querySelectorAll('.option-btn');
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove('active');
+    <div id="skin-tag" class="analysis-badge"></div>
+
+    <div id="skin-diag" class="diagnosis-text"></div>
+
+    <div class="ingredient-card">
+
+        <div style="font-weight:bold;margin-bottom:15px;color:#8a6d53;">
+            📊 肌膚需求分析
+        </div>
+
+        <div class="ing-row">
+            <div class="ing-meta">
+                <span id="ing1-name"></span>
+                <span id="ing1-val"></span>
+            </div>
+            <div class="progress-bg">
+                <div id="bar1" class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="ing-row">
+            <div class="ing-meta">
+                <span id="ing2-name"></span>
+                <span id="ing2-val"></span>
+            </div>
+            <div class="progress-bg">
+                <div id="bar2" class="progress-bar"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="section-label">
+        ✨ 居家保養推薦
+    </div>
+
+    <div class="product-box">
+
+        <div id="prod-img" class="prod-image">🧴</div>
+
+        <div class="prod-detail">
+            <div id="prod-name" class="prod-title"></div>
+            <div id="prod-price" class="prod-price"></div>
+        </div>
+
+    </div>
+
+    <a id="prod-link"
+       class="cta-button"
+       href="https://jourdeness.com"
+       target="_blank">
+       🎁 領取專屬體驗組
+    </a>
+
+</div>
+```
+
+</div>
+
+<script>
+
+function analyzeSkin(element,type){
+
+    document.querySelectorAll('.option-btn').forEach(function(btn){
+        btn.classList.remove('active');
+    });
+
+    element.classList.add('active');
+
+    const data = {
+
+        oily:{
+            tag:"油性肌膚分析",
+            diag:"您的肌膚皮脂分泌較旺盛，容易出現毛孔粗大與油光問題，建議以溫和代謝角質與平衡油脂為保養重點。",
+            ing1:"控油需求",
+            ing1Val:"90%",
+            bar1:"90%",
+            ing2:"毛孔淨化需求",
+            ing2Val:"75%",
+            bar2:"75%",
+            prod:"苦杏仁酸溫和煥膚精華",
+            price:"$880",
+            img:"🧪",
+            link:"https://jourdeness.com"
+        },
+
+        dry:{
+            tag:"乾性肌膚分析",
+            diag:"您的肌膚保水能力較弱，容易出現乾燥、脫屑與泛紅情況，建議優先修護肌膚屏障並提升保濕能力。",
+            ing1:"修護需求",
+            ing1Val:"95%",
+            bar1:"95%",
+            ing2:"補水需求",
+            ing2Val:"85%",
+            bar2:"85%",
+            prod:"龍血求麗精華 30ml",
+            price:"$1,190",
+            img:"🩸",
+            link:"https://jourdeness.com"
+        },
+
+        mix:{
+            tag:"混合肌膚分析",
+            diag:"您的肌膚呈現水油不平衡狀態，T字部位容易出油，兩頰偏乾，建議以平衡調理與穩定肌膚屏障為主。",
+            ing1:"油水平衡需求",
+            ing1Val:"80%",
+            bar1:"80%",
+            ing2:"修護需求",
+            ing2Val:"70%",
+            bar2:"70%",
+            prod:"玫瑰修護精華",
+            price:"$680",
+            img:"🌹",
+            link:"https://jourdeness.com"
         }
-        element.classList.add('active');
+    };
 
-        // 2. 顯示結果面板
-        var panel = document.getElementById('result-panel');
-        panel.style.display = 'block';
+    const res = data[type];
 
-        // 3. 定義膚質資料庫
-        var data = {
-            oily: {
-                tag: "油性肌膚診斷：油脂分泌過剩、毛孔粗大",
-                diag: "您的肌膚屏障目前處於皮脂腺高度活躍狀態。若盲目控油會導致內乾外油。科學配方建議引入【水楊酸】溶解深層毛孔頑垢，並搭配【茶樹萃取】進行底層調理。",
-                ing1: "水楊酸 (BHA)", ing1Val: "2.0%", bar1W: "90%",
-                ing2: "茶樹精純物", ing2Val: "1.5%", bar2W: "75%",
-                prod: "苦杏仁酸溫和煥膚精華", price: "$880 <del>$1,200</del>", img: "🧪",
-                link: "https://jourdeness.com"
-            },
-            dry: {
-                tag: "乾性肌膚診斷：角質層缺水、易敏感泛紅",
-                diag: "您的肌膚皮脂分泌量較低，鎖水屏障極度脆弱，易因換季產生隱形微裂口。黃金配方必須使用高濃度【秘魯龍血萃取】修復受損細胞，搭配【小分子玻尿酸】高密度灌注水分。",
-                ing1: "秘魯龍血超導萃取", ing1Val: "5.0%", bar1W: "95%",
-                ing2: "高純度玻尿酸", ing2Val: "3.5%", bar2W: "85%",
-                prod: "龍血求麗精華 30ml", price: "$1,190 <del>$1,580</del>", img: "🩸",
-                link: "https://jourdeness.com/product-detail/CHL009"
-            },
-            mix: {
-                tag: "混合性肌膚診斷：T字油、兩頰乾、水油失衡",
-                diag: "您的肌膚處於不穩定的「分區矛盾狀態」。針對這種膚質，核心策略是分區治理與屏障穩定。建議使用【菸鹼醯胺 (Vitamin B3)】同時平衡皮脂並強化兩頰鎖水力，搭配【胜肽】提升緊緻度。",
-                ing1: "菸鹼醯胺 (B3)", ing1Val: "4.0%", bar1W: "80%",
-                ing2: "多重複合胜肽", ing2Val: "2.0%", bar2W: "70%",
-                prod: "玫瑰輕感粉底妝前乳", price: "$680 <del>$980</del>", img: "🌹",
-                link: "https://jourdeness.com"
-            }
-        };
+    document.getElementById("result-panel").style.display = "block";
 
-        var res = data[type];
+    document.getElementById("skin-tag").innerText = res.tag;
+    document.getElementById("skin-diag").innerText = res.diag;
 
-        // 4. 填入內容
-        document.getElementById('skin-tag').innerText = res.tag;
-        document.getElementById('skin-diag').innerText = res.diag;
-        document.getElementById('ing1-name').innerText = res.ing1;
-        document.getElementById('ing1-val').innerText = res.ing1Val;
-        document.getElementById('ing2-name').innerText = res.ing2;
-        document.getElementById('ing2-val').innerText = res.ing2Val;
-        document.getElementById('prod-name').innerText = res.prod;
-        document.getElementById('prod-price').innerHTML = res.price;
-        document.getElementById('prod-img').innerText = res.img;
-        document.getElementById('prod-link').href = res.link;
+    document.getElementById("ing1-name").innerText = res.ing1;
+    document.getElementById("ing1-val").innerText = res.ing1Val;
 
-        // 5. 觸發進度條動畫
-        var b1 = document.getElementById('bar1');
-        var b2 = document.getElementById('bar2');
-        b1.style.width = '0%';
-        b2.style.width = '0%';
-        setTimeout(function() {
-            b1.style.width = res.bar1W;
-            b2.style.width = res.bar2W;
+    document.getElementById("ing2-name").innerText = res.ing2;
+    document.getElementById("ing2-val").innerText = res.ing2Val;
+
+    document.getElementById("prod-name").innerText = res.prod;
+    document.getElementById("prod-price").innerText = res.price;
+    document.getElementById("prod-img").innerText = res.img;
+    document.getElementById("prod-link").href = res.link;
+
+    document.getElementById("bar1").style.width = "0%";
+    document.getElementById("bar2").style.width = "0%";
+
+    setTimeout(function(){
+
+        document.getElementById("bar1").style.width = res.bar1;
+        document.getElementById("bar2").style.width = res.bar2;
+
+    },100);
+
+}
+
+</script>
+
+</body>
+</html>
