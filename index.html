@@ -1,369 +1,278 @@
 <!DOCTYPE html>
-
 <html lang="zh-TW">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>佐登妮絲 AI 精準膚況檢測</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-
-body{
-    background:#fcf9f6;
-    padding:20px;
-}
-
-.app-card{
-    max-width:480px;
-    margin:auto;
-    background:#fff;
-    border-radius:24px;
-    padding:24px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
-
-.brand-header{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.brand-name{
-    color:#b18764;
-    font-size:12px;
-    letter-spacing:3px;
-    margin-bottom:8px;
-}
-
-.main-title{
-    color:#4a3c31;
-    font-size:24px;
-}
-
-.section-label{
-    font-size:15px;
-    font-weight:700;
-    margin-bottom:12px;
-    color:#5a4c42;
-}
-
-.option-btn{
-    width:100%;
-    border:none;
-    background:#faf7f4;
-    border:1px solid #eadfd5;
-    border-radius:14px;
-    padding:16px;
-    margin-bottom:10px;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:600;
-    transition:.2s;
-}
-
-.option-btn:hover{
-    background:#f2ebe5;
-}
-
-.option-btn.active{
-    background:#8a6d53;
-    color:#fff;
-    border-color:#8a6d53;
-}
-
-#result-panel{
-    display:none;
-    margin-top:25px;
-    border-top:1px solid #eee;
-    padding-top:25px;
-}
-
-.analysis-badge{
-    display:inline-block;
-    background:#f7ece4;
-    color:#8a6d53;
-    padding:6px 10px;
-    border-radius:8px;
-    font-size:13px;
-    font-weight:bold;
-    margin-bottom:12px;
-}
-
-.diagnosis-text{
-    background:#faf7f4;
-    padding:14px;
-    border-radius:12px;
-    font-size:14px;
-    line-height:1.7;
-    margin-bottom:20px;
-}
-
-.ingredient-card{
-    border:1px solid #eee7e1;
-    border-radius:16px;
-    padding:16px;
-    margin-bottom:20px;
-}
-
-.ing-row{
-    margin-bottom:15px;
-}
-
-.ing-meta{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:6px;
-    font-size:13px;
-}
-
-.progress-bg{
-    background:#eee0d5;
-    height:8px;
-    border-radius:99px;
-    overflow:hidden;
-}
-
-.progress-bar{
-    height:100%;
-    width:0;
-    background:#8a6d53;
-    transition:.8s;
-}
-
-.product-box{
-    display:flex;
-    gap:15px;
-    align-items:center;
-    background:#faf7f4;
-    border-radius:16px;
-    padding:15px;
-}
-
-.prod-image{
-    width:70px;
-    height:70px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:34px;
-    background:white;
-    border-radius:12px;
-}
-
-.prod-detail{
-    flex:1;
-}
-
-.prod-title{
-    font-weight:700;
-    margin-bottom:6px;
-}
-
-.prod-price{
-    color:#d84a23;
-    font-weight:700;
-}
-
-.cta-button{
-    display:block;
-    text-align:center;
-    background:#8a6d53;
-    color:#fff;
-    text-decoration:none;
-    padding:15px;
-    border-radius:14px;
-    margin-top:16px;
-    font-weight:700;
-}
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JOURDENESS | 高級訂製肌膚處方</title>
+    <style>
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body {
+            background-color: #121212; /* 曜石黑頂級奢華背景 */
+            margin: 0;
+            padding: 24px 16px;
+            font-family: "Times New Roman", Times, "Noto Serif TC", serif, -apple-system, sans-serif;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        .luxury-wrapper {
+            max-width: 440px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border: 1px solid #332a21; /* 微調香檳金絲線邊框 */
+            border-radius: 0px; /* 大牌愛用的凌厲直角，展現精品感 */
+            padding: 40px 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        .brand-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .brand-logo {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 6px;
+            color: #d4af37; /* 經典法式香檳金 */
+            margin: 0 0 8px 0;
+            text-transform: uppercase;
+        }
+        .brand-divider {
+            width: 40px;
+            height: 1px;
+            background: #d4af37;
+            margin: 16px auto;
+        }
+        .main-subtitle {
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: #999999;
+            margin: 0;
+            font-weight: 300;
+        }
+        .section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-weight: 400;
+            text-align: center;
+        }
+        /* 痛點按鈕美化 */
+        .pain-container {
+            margin-bottom: 32px;
+        }
+        .pain-card {
+            width: 100%;
+            background: #222222;
+            border: 1px solid #333333;
+            padding: 20px 16px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: #dddddd;
+            cursor: pointer;
+            text-align: left;
+            margin-bottom: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .pain-card:active, .pain-card.active {
+            background: #2a241e;
+            border-color: #d4af37;
+            color: #ffffff;
+        }
+        .pain-card::after {
+            content: '→';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #555555;
+            transition: color 0.3s;
+        }
+        .pain-card.active::after {
+            color: #d4af37;
+        }
+        /* 奢華解方面板 */
+        #prescription-panel {
+            display: none;
+            border-top: 1px solid #332a21;
+            margin-top: 36px;
+            padding-top: 36px;
+            animation: fadeInGrace 0.6s ease forwards;
+        }
+        @keyframes fadeInGrace {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .diag-box {
+            font-size: 14px;
+            color: #cccccc;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        .component-title {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #999999;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        .component-tag {
+            font-size: 18px;
+            color: #d4af37;
+            font-weight: 400;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+        /* 精品級產品卡 */
+        .showcase-box {
+            background: #1e1e1e;
+            border: 1px solid #2a2a2a;
+            padding: 24px 16px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .prod-label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #888888;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .prod-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #ffffff;
+            margin: 0 0 12px 0;
+            letter-spacing: 1px;
+        }
+        .prod-price {
+            font-size: 16px;
+            color: #ffffff;
+            letter-spacing: 1px;
+            margin-bottom: 0;
+        }
+        .prod-price del {
+            font-size: 12px;
+            color: #666666;
+            margin-left: 8px;
+        }
+        /* 奢華奢華直達鈕 */
+        .luxury-cta {
+            display: block;
+            width: 100%;
+            background: #d4af37;
+            color: #121212;
+            text-align: center;
+            text-decoration: none;
+            padding: 16px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 24px;
+            transition: background 0.3s;
+        }
+        .luxury-cta:active {
+            background: #b89428;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="app-card">
-
-```
-<div class="brand-header">
-    <div class="brand-name">JOURDENESS LAB</div>
-    <h2 class="main-title">AI 精準膚況檢測</h2>
-</div>
-
-<div class="section-label">
-    📌 請選擇您的核心膚質
-</div>
-
-<button class="option-btn" onclick="analyzeSkin(this,'oily')">
-    🧪 油性肌
-</button>
-
-<button class="option-btn" onclick="analyzeSkin(this,'dry')">
-    🍂 乾性肌
-</button>
-
-<button class="option-btn" onclick="analyzeSkin(this,'mix')">
-    ⚖️ 混合肌
-</button>
-
-<div id="result-panel">
-
-    <div class="section-label">
-        🔬 AI分析結果
-    </div>
-
-    <div id="skin-tag" class="analysis-badge"></div>
-
-    <div id="skin-diag" class="diagnosis-text"></div>
-
-    <div class="ingredient-card">
-
-        <div style="font-weight:bold;margin-bottom:15px;color:#8a6d53;">
-            📊 肌膚需求分析
+    <div class="luxury-wrapper">
+        <div class="brand-header">
+            <div class="brand-logo">Jourdeness</div>
+            <div class="main-subtitle">高級訂製肌膚處方系列</div>
+            <div class="brand-divider"></div>
         </div>
 
-        <div class="ing-row">
-            <div class="ing-meta">
-                <span id="ing1-name"></span>
-                <span id="ing1-val"></span>
-            </div>
-            <div class="progress-bg">
-                <div id="bar1" class="progress-bar"></div>
-            </div>
+        <!-- 痛點情境激發 -->
+        <div class="section-title">請選擇您目前正迫切面臨的肌膚危情</div>
+        <div class="pain-container">
+            <button onclick="revealPrescription(this, 'dry')" class="pain-card">
+                乾燥微裂：粉底斑駁卡紋、兩頰緊繃泛紅
+            </button>
+            <button onclick="revealPrescription(this, 'dark')" class="pain-card">
+                熬夜暗沉：膚色蠟黃無光、疲憊感無所遁形
+            </button>
+            <button onclick="revealPrescription(this, 'lines')" class="pain-card">
+                初老鬆弛：線條逐漸下垂、鏡頭下乾紋顯著
+            </button>
         </div>
 
-        <div class="ing-row">
-            <div class="ing-meta">
-                <span id="ing2-name"></span>
-                <span id="ing2-val"></span>
+        <!-- 尊榮修護方案 -->
+        <div id="prescription-panel">
+            <div class="section-title">專屬高訂修護方案</div>
+            <div class="diag-box" id="skin-diag"></div>
+
+            <div class="component-title">核心標靶成分</div>
+            <div class="component-tag" id="component-name"></div>
+
+            <div class="showcase-box">
+                <div class="prod-label">推薦日常奢華對策</div>
+                <h4 class="prod-title" id="prod-name"></h4>
+                <div class="prod-price" id="prod-price"></div>
             </div>
-            <div class="progress-bg">
-                <div id="bar2" class="progress-bar"></div>
-            </div>
+            
+            <a href="https://jourdeness.com" id="prod-link" target="_blank" class="luxury-cta">尊榮直達體驗</a>
         </div>
-
     </div>
 
-    <div class="section-label">
-        ✨ 居家保養推薦
-    </div>
-
-    <div class="product-box">
-
-        <div id="prod-img" class="prod-image">🧴</div>
-
-        <div class="prod-detail">
-            <div id="prod-name" class="prod-title"></div>
-            <div id="prod-price" class="prod-price"></div>
-        </div>
-
-    </div>
-
-    <a id="prod-link"
-       class="cta-button"
-       href="https://jourdeness.com"
-       target="_blank">
-       🎁 領取專屬體驗組
-    </a>
-
-</div>
-```
-
-</div>
-
-<script>
-
-function analyzeSkin(element,type){
-
-    document.querySelectorAll('.option-btn').forEach(function(btn){
-        btn.classList.remove('active');
-    });
-
-    element.classList.add('active');
-
-    const data = {
-
-        oily:{
-            tag:"油性肌膚分析",
-            diag:"您的肌膚皮脂分泌較旺盛，容易出現毛孔粗大與油光問題，建議以溫和代謝角質與平衡油脂為保養重點。",
-            ing1:"控油需求",
-            ing1Val:"90%",
-            bar1:"90%",
-            ing2:"毛孔淨化需求",
-            ing2Val:"75%",
-            bar2:"75%",
-            prod:"苦杏仁酸溫和煥膚精華",
-            price:"$880",
-            img:"🧪",
-            link:"https://jourdeness.com"
-        },
-
-        dry:{
-            tag:"乾性肌膚分析",
-            diag:"您的肌膚保水能力較弱，容易出現乾燥、脫屑與泛紅情況，建議優先修護肌膚屏障並提升保濕能力。",
-            ing1:"修護需求",
-            ing1Val:"95%",
-            bar1:"95%",
-            ing2:"補水需求",
-            ing2Val:"85%",
-            bar2:"85%",
-            prod:"龍血求麗精華 30ml",
-            price:"$1,190",
-            img:"🩸",
-            link:"https://jourdeness.com"
-        },
-
-        mix:{
-            tag:"混合肌膚分析",
-            diag:"您的肌膚呈現水油不平衡狀態，T字部位容易出油，兩頰偏乾，建議以平衡調理與穩定肌膚屏障為主。",
-            ing1:"油水平衡需求",
-            ing1Val:"80%",
-            bar1:"80%",
-            ing2:"修護需求",
-            ing2Val:"70%",
-            bar2:"70%",
-            prod:"玫瑰修護精華",
-            price:"$680",
-            img:"🌹",
-            link:"https://jourdeness.com"
+    <script>
+    function revealPrescription(element, type) {
+        // 1. 切換點擊樣式
+        var cards = document.querySelectorAll('.pain-card');
+        for (var i = 0; i < cards.length; i++) {
+            cards[i].classList.remove('active');
         }
-    };
+        element.classList.add('active');
 
-    const res = data[type];
+        // 2. 顯示解方
+        var panel = document.getElementById('prescription-panel');
+        panel.style.display = 'block';
 
-    document.getElementById("result-panel").style.display = "block";
+        // 3. 大牌奢華文案資料庫（去 AI 化，強調專業度與痛點拯救）
+        var database = {
+            dry: {
+                diag: "當肌膚開始抗議，產生乾荒微裂與泛紅，代表表皮屏障已失去自禦能力。盲目的補水無法挽救底層防線，您需要的是具備極致修護能耐的頂級活性分子，為乾涸的角質築起隱形絲絨防護網。",
+                comp: "秘魯龍血超導精粹 × 深海智慧玻尿酸",
+                prod: "龍血求麗精華 30ml", 
+                price: "NT$ 1,190 <del>NT$ 1,580</del>",
+                link: "https://jourdeness.com/product-detail/CHL009"
+            },
+            dark: {
+                diag: "熬夜與作息不均會阻礙肌膚夜間的自我修復黃金期，導致黑色素沉澱與細胞暗沉。唯有透過高濃度的傳明酸從根源進行阻斷，並利用密集導入科技強迫肌膚重回細緻發光狀態，才能徹底告別疲憊蠟黃。",
+                comp: "高純度傳明酸 × 醫美級熊果素",
+                prod: "極光白高保濕面膜 (5入)", 
+                price: "NT$ 399 <del>NT$ 600</del>",
+                link: "https://jourdeness.com"
+            },
+            lines: {
+                diag: "時光的痕跡往往最先顯露於嘴角的細微線條。膠原蛋白的隱形流失，讓底妝在微距鏡頭下無處躲藏。必須藉由植物界最奢華的玫瑰精粹給予深度滋養，協同複合胜肽科技填補紋理，守住豐盈的肌膚輪廓。",
+                comp: "大馬士革玫瑰精粹 × 智慧複合胜肽",
+                prod: "玫瑰輕感妝前乳", 
+                price: "NT$ 680 <del>NT$ 980</del>",
+                link: "https://jourdeness.com"
+            }
+        };
 
-    document.getElementById("skin-tag").innerText = res.tag;
-    document.getElementById("skin-diag").innerText = res.diag;
+        var selected = database[type];
 
-    document.getElementById("ing1-name").innerText = res.ing1;
-    document.getElementById("ing1-val").innerText = res.ing1Val;
+        // 4. 精準寫入畫面
+        document.getElementById('skin-diag').innerText = selected.diag;
+        document.getElementById('component-name').innerText = selected.comp;
+        document.getElementById('prod-name').innerText = selected.prod;
+        document.getElementById('prod-price').innerHTML = selected.price;
+        document.getElementById('prod-link').href = selected.link;
 
-    document.getElementById("ing2-name").innerText = res.ing2;
-    document.getElementById("ing2-val").innerText = res.ing2Val;
-
-    document.getElementById("prod-name").innerText = res.prod;
-    document.getElementById("prod-price").innerText = res.price;
-    document.getElementById("prod-img").innerText = res.img;
-    document.getElementById("prod-link").href = res.link;
-
-    document.getElementById("bar1").style.width = "0%";
-    document.getElementById("bar2").style.width = "0%";
-
-    setTimeout(function(){
-
-        document.getElementById("bar1").style.width = res.bar1;
-        document.getElementById("bar2").style.width = res.bar2;
-
-    },100);
-
-}
-
-</script>
-
+        // 5. 手機平滑微滾動
+        setTimeout(function() {
+            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 150);
+    }
+    </script>
 </body>
 </html>
