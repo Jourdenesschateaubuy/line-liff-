@@ -4,6 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>JOURDENESS CASTLE | 城堡珍稀高訂肌膚處方</title>
+    
+    <!-- 1. 將關鍵腳本移到最頂端，確保點擊時絕對找得到函數 -->
+    <script>
+    // 💡 城堡官方帳號 LINE ID
+    var LINE_ID = "@jourdeness_castle"; 
+
+    var currentMsg = ""; // 儲存當前點選的下單文字
+    var globalLineUrl = "";
+
+    var database = {
+        aesthetic: {
+            why: "<b>為什麼您在此刻需要這款處方？</b><br>醫美雷射後的肌膚屏障處於極微創狀態，普通的玻尿酸保濕只能停留在表皮，無法修復底層。此時的肌膚極其脆弱，絕對不能接觸任何一絲酸類。這款處方能像為肌膚蓋上一座『無菌修護溫室』，提供極高濃度的龍血自我修復能耐，在底層阻斷水分蒸發、全面防止反黑危機。",
+            comp: "頂級秘魯龍血超導活性精純物 × 零負擔舒緩屏障因子",
+            prod: "城堡至臻龍血超導術後修護尊榮組",
+            price: "專櫃訂製價 NT$ 3,680 起",
+            msg: "我想預約諮詢【城堡至臻龍血超導術後修護尊榮組】。我剛做完醫美雷射，急需不能用酸的高密度術後修護，請安排城堡專櫃師協助我下一對一訂單。"
+        },
+        spots: {
+            why: "<b>為什麼您在此刻需要這款處方？</b><br>隨著歲月沉澱的老人斑與頑固斑點，是由於基底層黑色素母細胞長期堆積而成，開架的化學去角質只能淡化表皮，甚至會讓肌膚變薄變敏感。您需要的是如藝術品般精雕細琢的『標靶定點淡化技術』，高純度的精粹能精準滲透，像橡皮擦一樣定點瓦解深層色素，長期使用讓肌膚重回豪門貴婦般的通透淨白。",
+            comp: "城堡專利高訂傳明酸 × 標靶淨斑科技因子",
+            prod: "城堡皇家傳明酸定點奢華淡斑筆系列",
+            price: "專櫃訂製價 NT$ 4,500 起",
+            msg: "我想預約諮詢【城堡皇家傳明酸定點奢華淡斑筆系列】。我目前有長年頑固老人斑、曬斑的困擾，想透過淡斑筆系列進行定點淨白，請幫我安排專櫃師下單。"
+        },
+        sagging: {
+            why: "<b>為什麼您在此刻需要這款處方？</b><br>女性最優雅的底氣，來自緊緻的面部輪廓線。當膠原蛋白因不可逆的引力流失，鬆弛與深層法令紋就會讓底妝無處躲藏。這款處方不添加任何刺激物，而是以極其奢華的大馬士革玫瑰微分子與智慧胜肽，像微型鋼絲一樣網狀填補肌膚紋理，透過長期居家護理，幫肌膚找回頂級大牌推崇的豐盈輪廓線。",
+            comp: "皇家大馬士革玫瑰微分子精粹 × 智慧逆齡複合胜肽",
+            prod: "城堡御用大馬士革玫瑰極致逆齡奢華全效組",
+            price: "專櫃訂製價 NT$ 3,980 起",
+            msg: "我想預約諮詢【城堡御用大馬士革玫瑰極致逆齡奢華全效組】。我目前有熟齡垮臉、輪廓鬆弛與法令紋的困擾，想透過大馬士革玫瑰逆齡組改善，請安排專櫃師協助下一對一訂單。"
+        }
+    };
+
+    function revealPrescription(element, type) {
+        var cards = document.querySelectorAll('.demand-card');
+        for (var i = 0; i < cards.length; i++) {
+            cards[i].classList.remove('active');
+        }
+        element.classList.add('active');
+
+        var panel = document.getElementById('prescription-panel');
+        var selected = database[type];
+
+        document.getElementById('skin-why').innerHTML = selected.why;
+        document.getElementById('component-name').innerText = selected.comp;
+        document.getElementById('prod-name').innerText = selected.prod;
+        document.getElementById('prod-price').innerHTML = selected.price;
+
+        currentMsg = selected.msg;
+        globalLineUrl = "https://line.me" + LINE_ID + "/?" + encodeURIComponent(currentMsg);
+
+        panel.style.display = 'block';
+
+        setTimeout(function() {
+            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
+
+    function redirectToLine() {
+        var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        if (isMobile) {
+            window.location.href = globalLineUrl;
+            setTimeout(function() {
+                window.location.href = "https://line.me" + LINE_ID;
+            }, 500);
+        } else {
+            alert("✨【電腦網頁測試成功】✨\n\n未來當客人在手機 LINE 點擊此按鈕時，將會自動在對話輸入框帶入以下諮詢字樣：\n\n「" + currentMsg + "」");
+        }
+    }
+    </script>
+
     <style>
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body {
@@ -202,7 +273,7 @@
             </button>
             <button onclick="revealPrescription(this, 'spots')" class="demand-card">
                 ⏳ 長年頑固老人斑、深層點狀曬斑
-                <span>歲月痕跡：一般的亮白無效、渴望精專標靶定點擊碎</span>
+                <span>歲月痕跡：一般的亮白無效、渴望精準標靶定點擊碎</span>
             </button>
             <button onclick="revealPrescription(this, 'sagging')" class="demand-card">
                 👑 熟齡面部輪廓鬆弛、深層垮臉乾紋
@@ -225,76 +296,3 @@
                 <div class="prod-note">※ 本珍稀系列採限量配額，由城堡私人專櫃師一對一諮詢提供。</div>
             </div>
             
-            <button onclick="redirectToLine()" class="luxury-cta">與城堡私人專櫃師一對一諮詢下單</button>
-        </div>
-    </div>
-
-    <script>
-    // 💡 城堡官方帳號 LINE ID
-    var LINE_ID = "@jourdeness_castle"; 
-
-    var currentMsg = ""; // 儲存當前點選的下單文字
-    var globalLineUrl = "";
-
-    var database = {
-        aesthetic: {
-            why: "<b>為什麼您在此刻需要這款處方？</b><br>醫美雷射後的肌膚屏障處於極微創狀態，普通的玻尿酸保濕只能停留在表皮，無法修復底層。此時的肌膚極其脆弱，絕對不能接觸任何一絲酸類。這款處方能像為肌膚蓋上一座『無菌修護溫室』，提供極高濃度的龍血自我修復能耐，在底層阻斷水分蒸發、全面防止反黑危機。",
-            comp: "頂級秘魯龍血超導活性精純物 × 零負擔舒緩屏障因子",
-            prod: "城堡至臻龍血超導術後修護尊榮組",
-            price: "專櫃訂製價 NT$ 3,680 起",
-            msg: "我想預約諮詢【城堡至臻龍血超導術後修護尊榮組】。我剛做完醫美雷射，急需不能用酸的高密度術後修護，請安排城堡專櫃師協助我下一對一訂單。"
-        },
-        spots: {
-            why: "<b>為什麼您在此刻需要這款處方？</b><br>隨著歲月沉澱的老人斑與頑固斑點，是由於基底層黑色素母細胞長期堆積而成，開架的化學去角質只能淡化表皮，甚至會讓肌膚變薄變敏感。您需要的是如藝術品般精雕細琢的『標靶定點淡化技術』，高純度的精粹能精準滲透，像橡皮擦一樣定點瓦解深層色素，長期使用讓肌膚重回豪門貴婦般的通透淨白。",
-            comp: "城堡專利高訂傳明酸 × 標靶淨斑科技因子",
-            prod: "城堡皇家傳明酸定點奢華淡斑筆系列",
-            price: "專櫃訂製價 NT$ 4,500 起",
-            msg: "我想預約諮詢【城堡皇家傳明酸定點奢華淡斑筆系列】。我目前有長年頑固老人斑、曬斑的困擾，想透過淡斑筆系列進行定點淨白，請幫我安排專櫃師下單。"
-        },
-        sagging: {
-            why: "<b>為什麼您在此刻需要這款處方？</b><br>女性最優雅的底氣，來自緊緻的面部輪廓線。當膠原蛋白因不可逆的引力流失，鬆弛與深層法令紋就會讓底妝無處躲藏。這款處方不添加任何刺激物，而是以極其奢華的大馬士革玫瑰微分子與智慧胜肽，像微型鋼絲一樣網狀填補肌膚紋理，透過長期居家護理，幫肌膚找回頂級大牌推崇的豐盈輪廓線。",
-            comp: "皇家大馬士革玫瑰微分子精粹 × 智慧逆齡複合胜肽",
-            prod: "城堡御用大馬士革玫瑰極致逆齡奢華全效組",
-            price: "專櫃訂製價 NT$ 3,980 起",
-            msg: "我想預約諮詢【城堡御用大馬士革玫瑰極致逆齡奢華全效組】。我目前有熟齡垮臉、輪廓鬆弛與法令紋的困擾，想透過大馬士革玫瑰逆齡組改善，請安排專櫃師協助下一對一訂單。"
-        }
-    };
-
-    function revealPrescription(element, type) {
-        var cards = document.querySelectorAll('.demand-card');
-        for (var i = 0; i < cards.length; i++) {
-            cards[i].classList.remove('active');
-        }
-        element.classList.add('active');
-
-        var panel = document.getElementById('prescription-panel');
-        var selected = database[type];
-
-        document.getElementById('skin-why').innerHTML = selected.why;
-        document.getElementById('component-name').innerText = selected.comp;
-        document.getElementById('prod-name').innerText = selected.prod;
-        document.getElementById('prod-price').innerHTML = selected.price;
-
-        // 紀錄目前的發送訊息
-        currentMsg = selected.msg;
-        globalLineUrl = "https://line.me" + LINE_ID + "/?" + encodeURIComponent(currentMsg);
-
-        panel.style.display = 'block';
-
-        setTimeout(function() {
-            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 100);
-    }
-
-    function redirectToLine() {
-        // 偵測是否在智慧型手機/行動裝置環境
-        var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-        
-        if (isMobile) {
-            // 手機端正常跳轉到 LINE
-            window.location.href = globalLineUrl;
-            setTimeout(function() {
-                window.location.href = "https://line.me" + LINE_ID;
-            }, 500);
-        } else {
-            // 💻 電腦網頁測試端：彈出奢華通知，展示預期文字
