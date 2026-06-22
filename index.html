@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JOURDENESS | 高級訂製肌膚處方</title>
+    <title>JOURDENESS CASTLE | 城堡珍稀高訂肌膚處方</title>
     <style>
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body {
-            background-color: #121212; /* 曜石黑頂級奢華背景 */
+            background-color: #121212;
             margin: 0;
             padding: 24px 16px;
             font-family: "Times New Roman", Times, "Noto Serif TC", serif, -apple-system, sans-serif;
@@ -18,31 +18,30 @@
             max-width: 440px;
             margin: 0 auto;
             background: #1a1a1a;
-            border: 1px solid #332a21; /* 微調香檳金絲線邊框 */
-            border-radius: 0px; /* 大牌愛用的凌厲直角，展現精品感 */
-            padding: 40px 24px;
+            border: 1px solid #332a21;
+            padding: 40px 20px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
         .brand-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 36px;
         }
         .brand-logo {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 300;
-            letter-spacing: 6px;
-            color: #d4af37; /* 經典法式香檳金 */
-            margin: 0 0 8px 0;
+            letter-spacing: 5px;
+            color: #d4af37;
+            margin: 0 0 6px 0;
             text-transform: uppercase;
         }
         .brand-divider {
-            width: 40px;
+            width: 30px;
             height: 1px;
             background: #d4af37;
-            margin: 16px auto;
+            margin: 14px auto;
         }
         .main-subtitle {
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 2px;
             color: #999999;
             margin: 0;
@@ -51,132 +50,145 @@
         .section-title {
             font-size: 13px;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: #d4af37;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             font-weight: 400;
             text-align: center;
         }
-        /* 痛點按鈕美化 */
-        .pain-container {
+        /* 需求卡片排版 */
+        .demand-container {
             margin-bottom: 32px;
         }
-        .pain-card {
+        .demand-card {
             width: 100%;
             background: #222222;
             border: 1px solid #333333;
             padding: 20px 16px;
             font-size: 14px;
             letter-spacing: 1px;
-            color: #dddddd;
+            color: #cccccc;
             cursor: pointer;
             text-align: left;
             margin-bottom: 14px;
-            transition: all 0.3s ease;
             position: relative;
+            transition: all 0.3s ease;
+            line-height: 1.5;
         }
-        .pain-card:active, .pain-card.active {
+        .demand-card:active, .demand-card.active {
             background: #2a241e;
             border-color: #d4af37;
             color: #ffffff;
         }
-        .pain-card::after {
+        .demand-card::after {
             content: '→';
             position: absolute;
-            right: 20px;
+            right: 16px;
             top: 50%;
             transform: translateY(-50%);
-            color: #555555;
-            transition: color 0.3s;
+            color: #444444;
         }
-        .pain-card.active::after {
+        .demand-card.active::after {
             color: #d4af37;
         }
-        /* 奢華解方面板 */
+        .demand-card span {
+            display: block;
+            font-size: 11px;
+            color: #888888;
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+        /* 處方便板 */
         #prescription-panel {
             display: none;
             border-top: 1px solid #332a21;
             margin-top: 36px;
-            padding-top: 36px;
-            animation: fadeInGrace 0.6s ease forwards;
+            padding-top: 32px;
+            animation: fadeInGrace 0.5s ease forwards;
         }
         @keyframes fadeInGrace {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .diag-box {
-            font-size: 14px;
+        /* 科學解析區 */
+        .why-box {
+            background: #1e1914;
+            border-left: 2px solid #d4af37;
+            padding: 16px;
+            font-size: 13.5px;
             color: #cccccc;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             letter-spacing: 1px;
             line-height: 1.8;
             text-align: justify;
         }
-        .component-title {
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: #999999;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-        }
-        .component-tag {
-            font-size: 18px;
+        .why-box b {
             color: #d4af37;
-            font-weight: 400;
-            margin-bottom: 24px;
-            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
         }
-        /* 精品級產品卡 */
-        .showcase-box {
-            background: #1e1e1e;
-            border: 1px solid #2a2a2a;
-            padding: 24px 16px;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .prod-label {
+        .component-meta {
             font-size: 11px;
             letter-spacing: 2px;
             color: #888888;
+            margin-bottom: 6px;
             text-transform: uppercase;
-            margin-bottom: 8px;
+        }
+        .component-value {
+            font-size: 16px;
+            color: #ffffff;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+        /* 產品展示 */
+        .showcase-box {
+            background: #1a1a1a;
+            border: 1px solid #2b2b2b;
+            padding: 24px 16px;
+            text-align: center;
+            margin-top: 16px;
+        }
+        .prod-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #d4af37;
+            text-transform: uppercase;
+            margin-bottom: 6px;
         }
         .prod-title {
             font-size: 16px;
-            font-weight: 400;
+            font-weight: 500;
             color: #ffffff;
-            margin: 0 0 12px 0;
+            margin: 0 0 8px 0;
             letter-spacing: 1px;
         }
         .prod-price {
-            font-size: 16px;
-            color: #ffffff;
+            font-size: 15px;
+            color: #e0deda;
             letter-spacing: 1px;
-            margin-bottom: 0;
         }
-        .prod-price del {
-            font-size: 12px;
-            color: #666666;
-            margin-left: 8px;
+        .prod-note {
+            font-size: 11px;
+            color: #777777;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
         }
-        /* 奢華奢華直達鈕 */
+        /* LINE 客製化諮詢鈕 */
         .luxury-cta {
             display: block;
             width: 100%;
-            background: #d4af37;
+            background: linear-gradient(135deg, #e5c060, #b18764);
             color: #121212;
             text-align: center;
             text-decoration: none;
             padding: 16px;
             font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 3px;
+            font-weight: 700;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            margin-top: 24px;
-            transition: background 0.3s;
-        }
-        .luxury-cta:active {
-            background: #b89428;
+            margin-top: 28px;
+            box-shadow: 0 8px 24px rgba(177, 135, 100, 0.25);
         }
     </style>
 </head>
@@ -184,95 +196,102 @@
 
     <div class="luxury-wrapper">
         <div class="brand-header">
-            <div class="brand-logo">Jourdeness</div>
-            <div class="main-subtitle">高級訂製肌膚處方系列</div>
+            <div class="brand-logo">Jourdeness Castle</div>
+            <div class="main-subtitle">佐登妮絲城堡 | 奢華高訂肌膚處方</div>
             <div class="brand-divider"></div>
         </div>
 
-        <!-- 痛點情境激發 -->
-        <div class="section-title">請選擇您目前正迫切面臨的肌膚危情</div>
-        <div class="pain-container">
-            <button onclick="revealPrescription(this, 'dry')" class="pain-card">
-                乾燥微裂：粉底斑駁卡紋、兩頰緊繃泛紅
+        <!-- 步驟一：選擇核心需求 -->
+        <div class="section-title">請選擇您目前迫切需要被解決的肌膚核心渴望</div>
+        <div class="demand-container">
+            <button onclick="revealPrescription(this, 'aesthetic')" class="demand-card">
+                ✨ 醫美雷射術後急需高密度保濕
+                <span>特殊狀態：脆弱泛紅、絕不能碰酸、極需細胞自我修護</span>
             </button>
-            <button onclick="revealPrescription(this, 'dark')" class="pain-card">
-                熬夜暗沉：膚色蠟黃無光、疲憊感無所遁形
+            <button onclick="revealPrescription(this, 'spots')" class="demand-card">
+                ⏳ 長年頑固老人斑、深層點狀曬斑
+                <span>歲月痕跡：一般的亮白無效、渴望精準標靶定點擊碎</span>
             </button>
-            <button onclick="revealPrescription(this, 'lines')" class="pain-card">
-                初老鬆弛：線條逐漸下垂、鏡頭下乾紋顯著
+            <button onclick="revealPrescription(this, 'sagging')" class="demand-card">
+                👑 熟齡面部輪廓鬆弛、深層垮臉乾紋
+                <span>頂級抗衰：拍照不再有底氣、底妝精準卡在法令紋</span>
             </button>
         </div>
 
-        <!-- 尊榮修護方案 -->
+        <!-- 步驟二：展示頂級解方與大牌藝術分析 -->
         <div id="prescription-panel">
-            <div class="section-title">專屬高訂修護方案</div>
-            <div class="diag-box" id="skin-diag"></div>
+            <div class="section-title">城堡高級訂製對策</div>
+            
+            <div class="why-box" id="skin-why"></div>
 
-            <div class="component-title">核心標靶成分</div>
-            <div class="component-tag" id="component-name"></div>
+            <div class="component-meta">珍稀奢華核心成分</div>
+            <div class="component-value" id="component-name"></div>
 
             <div class="showcase-box">
-                <div class="prod-label">推薦日常奢華對策</div>
+                <div class="prod-label">佐登城堡限定珍萃系列</div>
                 <h4 class="prod-title" id="prod-name"></h4>
                 <div class="prod-price" id="prod-price"></div>
+                <div class="prod-note">※ 本珍稀系列採限量配額，由城堡私人專櫃師一對一諮詢提供。</div>
             </div>
             
-            <a href="https://jourdeness.com" id="prod-link" target="_blank" class="luxury-cta">尊榮直達體驗</a>
+            <!-- LINE 尊榮下單連結 -->
+            <a href="#" id="line-consult-btn" class="luxury-cta">與城堡私人專櫃師一對一諮詢下單</a>
         </div>
     </div>
 
     <script>
+    // 請在此處填寫您佐登妮絲城堡 LINE 官方帳號的正確 ID (例如 @jd_castle)
+    var LINE_ACCOUNT_ID = "@jourdeness_castle"; 
+
+    // 奢華大牌導購資料庫：強調長期護膚藝術、術後修護與痛點對應
+    var database = {
+        aesthetic: {
+            why: "<b>為什麼您在此刻需要這款處方？</b><br>醫美雷射後的肌膚屏障處於極微創狀態，普通的玻尿酸保濕只能停留在表皮，無法修復底層。此時的肌膚極其脆弱，絕對不能接觸任何一絲酸類。這款處方能像為肌膚蓋上一座『無菌修護溫室』，提供極高濃度的龍血自我修復能耐，在底層阻斷水分蒸發、全面防止反黑危機。",
+            comp: "頂級秘魯龍血超導活性精純物 × 零負擔舒緩屏障因子",
+            prod: "城堡至臻龍血超導術後修護尊榮組",
+            price: "專櫃訂製價 NT$ 3,680 起",
+            msg: "我想預約諮詢【城堡至臻龍血超導術後修護尊榮組】。我剛做完醫美雷射，急需不能用酸的高密度術後修護，請安排城堡專櫃師協助我下一對一訂單。"
+        },
+        spots: {
+            why: "<b>為什麼您在此刻需要這款處方？</b><br>隨著歲月沉澱的老人斑與頑固斑點，是由於基底層黑色素母細胞長期堆積而成，開架的化學去角質只能淡化表皮，甚至會讓肌膚變薄變敏感。您需要的是如藝術品般精雕細琢的『標靶定點淡化技術』，高純度的精粹能精準滲透，像橡皮擦一樣定點瓦解深層色素，長期使用讓肌膚重回豪門貴婦般的通透淨白。",
+            comp: "城堡專利高訂傳明酸 × 標靶淨斑科技因子",
+            prod: "城堡皇家傳明酸定點奢華淡斑筆系列",
+            price: "專櫃訂製價 NT$ 4,500 起",
+            msg: "我想預約諮詢【城堡皇家傳明酸定點奢華淡斑筆系列】。我目前有長年頑固老人斑、曬斑的困擾，想透過淡斑筆系列進行定點淨白，請幫我安排專櫃師下單。"
+        },
+        sagging: {
+            why: "<b>為什麼您在此刻需要這款處方？</b><br>女性最優雅的底氣，來自緊緻的面部輪廓線。當膠原蛋白因不可逆的引力流失，鬆弛與深層法令紋就會讓底妝無處躲藏。這款處方不添加任何刺激物，而是以極其奢華的大馬士革玫瑰微分子與智慧胜肽，像微型鋼絲一樣網狀填補肌膚紋理，透過長期居家護理，幫肌膚找回頂級大牌推崇的豐盈輪廓線。",
+            comp: "皇家大馬士革玫瑰微分子精粹 × 智慧逆齡複合胜肽",
+            prod: "城堡御用大馬士革玫瑰極致逆齡奢華全效組",
+            price: "專櫃訂製價 NT$ 3,980 起",
+            msg: "我想預約諮詢【城堡御用大馬士革玫瑰極致逆齡奢華全效組】。我目前有熟齡垮臉、輪廓鬆弛與法令紋的困擾，想透過大馬士革玫瑰逆齡組改善，請安排專櫃師協助下一對一訂單。"
+        }
+    };
+
     function revealPrescription(element, type) {
         // 1. 切換點擊樣式
-        var cards = document.querySelectorAll('.pain-card');
+        var cards = document.querySelectorAll('.demand-card');
         for (var i = 0; i < cards.length; i++) {
             cards[i].classList.remove('active');
         }
         element.classList.add('active');
 
-        // 2. 顯示解方
+        // 2. 顯示解方案板
         var panel = document.getElementById('prescription-panel');
-        panel.style.display = 'block';
-
-        // 3. 大牌奢華文案資料庫（去 AI 化，強調專業度與痛點拯救）
-        var database = {
-            dry: {
-                diag: "當肌膚開始抗議，產生乾荒微裂與泛紅，代表表皮屏障已失去自禦能力。盲目的補水無法挽救底層防線，您需要的是具備極致修護能耐的頂級活性分子，為乾涸的角質築起隱形絲絨防護網。",
-                comp: "秘魯龍血超導精粹 × 深海智慧玻尿酸",
-                prod: "龍血求麗精華 30ml", 
-                price: "NT$ 1,190 <del>NT$ 1,580</del>",
-                link: "https://jourdeness.com/product-detail/CHL009"
-            },
-            dark: {
-                diag: "熬夜與作息不均會阻礙肌膚夜間的自我修復黃金期，導致黑色素沉澱與細胞暗沉。唯有透過高濃度的傳明酸從根源進行阻斷，並利用密集導入科技強迫肌膚重回細緻發光狀態，才能徹底告別疲憊蠟黃。",
-                comp: "高純度傳明酸 × 醫美級熊果素",
-                prod: "極光白高保濕面膜 (5入)", 
-                price: "NT$ 399 <del>NT$ 600</del>",
-                link: "https://jourdeness.com"
-            },
-            lines: {
-                diag: "時光的痕跡往往最先顯露於嘴角的細微線條。膠原蛋白的隱形流失，讓底妝在微距鏡頭下無處躲藏。必須藉由植物界最奢華的玫瑰精粹給予深度滋養，協同複合胜肽科技填補紋理，守住豐盈的肌膚輪廓。",
-                comp: "大馬士革玫瑰精粹 × 智慧複合胜肽",
-                prod: "玫瑰輕感妝前乳", 
-                price: "NT$ 680 <del>NT$ 980</del>",
-                link: "https://jourdeness.com"
-            }
-        };
-
         var selected = database[type];
 
-        // 4. 精準寫入畫面
-        document.getElementById('skin-diag').innerText = selected.diag;
+        // 3. 填入高端品牌文案與成分深度解析
+        document.getElementById('skin-why').innerHTML = selected.why;
         document.getElementById('component-name').innerText = selected.comp;
         document.getElementById('prod-name').innerText = selected.prod;
         document.getElementById('prod-price').innerHTML = selected.price;
-        document.getElementById('prod-link').href = selected.link;
+
+        // 4. 自動生成客製化 LINE 導流網址（直接填入對白）
+        var encodedMsg = encodeURIComponent(selected.msg);
+        var lineUrl = "https://line.me" + LINE_ACCOUNT_ID + "/?" + encodedMsg;
+        document.getElementById('line-consult-btn').href = lineUrl;
+
+        panel.style.display = 'block';
 
         // 5. 手機平滑微滾動
         setTimeout(function() {
-            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 150);
-    }
-    </script>
-</body>
-</html>
