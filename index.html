@@ -5,35 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>JOURDENESS CASTLE | 城堡珍稀高訂肌膚處方</title>
     
-    <!-- 1. 將關鍵腳本移到最頂端，確保點擊時絕對找得到函數 -->
+    <!-- 關鍵美學腳本：確保老客人點擊時 0.1秒絲滑展開知識 -->
     <script>
-    // 💡 城堡官方帳號 LINE ID
-    var LINE_ID = "@jourdeness_castle"; 
-
-    var currentMsg = ""; // 儲存當前點選的下單文字
-    var globalLineUrl = "";
-
+    // 城堡高奢知識庫與科學比喻
     var database = {
-        aesthetic: {
-            why: "<b>為什麼您在此刻需要這款處方？</b><br>醫美雷射後的肌膚屏障處於極微創狀態，普通的玻尿酸保濕只能停留在表皮，無法修復底層。此時的肌膚極其脆弱，絕對不能接觸任何一絲酸類。這款處方能像為肌膚蓋上一座『無菌修護溫室』，提供極高濃度的龍血自我修復能耐，在底層阻斷水分蒸發、全面防止反黑危機。",
-            comp: "頂級秘魯龍血超導活性精純物 × 零負擔舒緩屏障因子",
-            prod: "城堡至臻龍血超導術後修護尊榮組",
-            price: "專櫃訂製價 NT$ 3,680 起",
-            msg: "我想預約諮詢【城堡至臻龍血超導術後修護尊榮組】。我剛做完醫美雷射，急需不能用酸的高密度術後修護，請安排城堡專櫃師協助我下一對一訂單。"
+        travel: {
+            why: "<b>🥀 為什麼妳在此刻需要這款處方？</b><br>熟齡肌最常面臨『中午過後膚色發黃、發灰』的尷尬。許多貴賓遇到這種乾癟與暗沉，會慌張地去買更厚、更濃稠的精華油。但真相是：老化的皮膚表面就像<b>一塊曬乾、變硬的絲瓜絡</b>，吸收通道早已卡死。分子巨大的普通玫瑰油只會堆在表面氧化變黃！<br><br>佐登專利 NanoTOBI 技術，將頂級玫瑰精粹縮小成無數個『微米超導膠囊』，像<b>穿牆彈</b>一樣穿透僵硬角質，2.3倍直攻肌底，重新通開吸收開關。這不是多擦一瓶保養品，是幫妳化妝桌上的乳霜裝上極致放大器。",
+            comp: "四國富硒玫瑰精粹 × NanoTOBI 專利微米超導膠囊技術",
+            prod: "城堡高訂．玫瑰超微晶萃系列"
         },
-        spots: {
-            why: "<b>為什麼您在此刻需要這款處方？</b><br>隨著歲月沉澱的老人斑與頑固斑點，是由於基底層黑色素母細胞長期堆積而成，開架的化學去角質只能淡化表皮，甚至會讓肌膚變薄變敏感。您需要的是如藝術品般精雕細琢的『標靶定點淡化技術』，高純度的精粹能精準滲透，像橡皮擦一樣定點瓦解深層色素，長期使用讓肌膚重回豪門貴婦般的通透淨白。",
-            comp: "城堡專利高訂傳明酸 × 標靶淨斑科技因子",
-            prod: "城堡皇家傳明酸定點奢華淡斑筆系列",
-            price: "專櫃訂製價 NT$ 4,500 起",
-            msg: "我想預約諮詢【城堡皇家傳明酸定點奢華淡斑筆系列】。我目前有長年頑固老人斑、曬斑的困擾，想透過淡斑筆系列進行定點淨白，請幫我安排專櫃師下單。"
+        ecosystem: {
+            why: "<b>🧪 為什麼妳在此刻需要這款處方？</b><br>每逢換季、吹強烈冷氣，臉皮就莫名發燙、大泛紅、冒出粗糙微小顆粒？這其實是因為妳肌膚表面的『菌群生態崩潰了』。當好菌流失，壞菌瘋狂佔領毛孔，妳的肌膚屏障就像<b>防禦系統徹底癱瘓、門戶大開的城牆</b>。這時妳擦再貴的乳霜，都會被壞菌啃食並引發慢性發炎，導致越保養越脆弱！<br><br>INSK 乳酸平衡系列每 1mL 蘊含 3500萬個益菌萃取，一擦下去，就像<b>直接往癱瘓城牆上『空降精銳的好菌自衛隊』</b>。好菌瞬間壓制壞菌、搶回地盤並收復生態保護傘，為妳後續的抗老精品穩穩護航開路。",
+            comp: "益菌金三角微生態因子 (比菲德氏菌/乳酸桿菌/釀酒酵母)",
+            prod: "城堡黑標．INSK 乳酸平衡系列 (老客必備雪露)"
         },
-        sagging: {
-            why: "<b>為什麼您在此刻需要這款處方？</b><br>女性最優雅的底氣，來自緊緻的面部輪廓線。當膠原蛋白因不可逆的引力流失，鬆弛與深層法令紋就會讓底妝無處躲藏。這款處方不添加任何刺激物，而是以極其奢華的大馬士革玫瑰微分子與智慧胜肽，像微型鋼絲一樣網狀填補肌膚紋理，透過長期居家護理，幫肌膚找回頂級大牌推崇的豐盈輪廓線。",
-            comp: "皇家大馬士革玫瑰微分子精粹 × 智慧逆齡複合胜肽",
-            prod: "城堡御用大馬士革玫瑰極致逆齡奢華全效組",
-            price: "專櫃訂製價 NT$ 3,980 起",
-            msg: "我想預約諮詢【城堡御用大馬士革玫瑰極致逆齡奢華全效組】。我目前有熟齡垮臉、輪廓鬆弛與法令紋的困擾，想透過大馬士革玫瑰逆齡組改善，請安排專櫃師協助下一對一訂單。"
+        sculpt: {
+            why: "<b>👑 為什麼妳在此刻需要這款處方？</b><br>拍合照頭稍微低一點下顎線就消失？一微笑底妝就精準卡在深深的法令紋裡？這代表肌底正在『慢性塌陷』。如果把皮膚比喻成一棟房子，水分和乳霜只是表面的油漆，而彈力纖維則是水泥內部的鋼筋。<b>當底層的鋼筋（彈力網）因為年齡而斷裂、大塌陷時，妳在房頂刷再厚、再貴的精美油漆（乳霜），輪廓線依然會照樣塌給妳看！</b><br><br>肌光緊緻系列利用高訂微分子胜肽，能直接穿透皮表，化身為無數條<b>隱形生物鋼絲</b>，網狀牽引、死死拉住下垂的輪廓線，並同時進行底層水泥灌漿，把法令紋與凹陷從最深處垂直往上撐起。",
+            comp: "高活性藍銅胜肽精粹 × 智慧逆齡網狀複合胜肽",
+            prod: "城堡天花板．肌光緊緻抗衰拉提系列"
+        },
+        shield: {
+            why: "<b>🛡️ 為什麼妳在此刻需要這款處方？</b><br>不論是換季大脫屑，還是剛做完皮秒、電音波醫美，微創期的肌膚乾到像要裂開。這時候盲目狂灌玻尿酸（補水），皮膚就像一個<b>底部破了無數大洞的漏水水桶</b>。水分倒進去立馬蒸發，還會物理性地把肌底僅存的微量水分一起帶走，導致『越保濕越乾癟』，甚至誤擦含有化學酸類/香精的普通保養品而發炎反黑！<br><br>這款處方中，玻尿酸負責加水，而秘魯龍血則是扮演<b>水桶的防水補丁</b>。它在科學本質上是『液態無菌防護罩』，一抹下去就像<b>把脆弱的植物放進無菌溫室</b>，安撫發燙泛紅，把水分死死鎖在基底，為妳昂貴的醫美效果與奢華保養買一份終極保險。",
+            comp: "頂級秘魯龍血超導活性精純物 × 瞬效爆水小分子玻尿酸",
+            prod: "城堡不敗王牌．龍血求麗修護系列"
         }
     };
 
@@ -50,38 +44,28 @@
         document.getElementById('skin-why').innerHTML = selected.why;
         document.getElementById('component-name').innerText = selected.comp;
         document.getElementById('prod-name').innerText = selected.prod;
-        document.getElementById('prod-price').innerHTML = selected.price;
-
-        currentMsg = selected.msg;
-        globalLineUrl = "https://line.me" + LINE_ID + "/?" + encodeURIComponent(currentMsg);
 
         panel.style.display = 'block';
+
+        // 電腦網頁端預覽除錯警示，確保邏輯完美
+        var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        if (!isMobile) {
+            console.log("✨【佐登城堡美學沙龍】老客成功點擊分析器：" + selected.prod);
+        }
 
         setTimeout(function() {
             panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }, 100);
-    }
-
-    function redirectToLine() {
-        var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-        if (isMobile) {
-            window.location.href = globalLineUrl;
-            setTimeout(function() {
-                window.location.href = "https://line.me" + LINE_ID;
-            }, 500);
-        } else {
-            alert("✨【電腦網頁測試成功】✨\n\n未來當客人在手機 LINE 點擊此按鈕時，將會自動在對話輸入框帶入以下諮詢字樣：\n\n「" + currentMsg + "」");
-        }
     }
     </script>
 
     <style>
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body {
-            background-color: #121212;
+            background-color: #121212; /* 曜石黑高奢背景 */
             margin: 0;
             padding: 24px 16px;
-            font-family: "Times New Roman", Times, "Noto Serif TC", serif, -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Times New Roman", "Noto Serif TC", serif;
             color: #ffffff;
             line-height: 1.6;
         }
@@ -89,7 +73,7 @@
             max-width: 440px;
             margin: 0 auto;
             background: #1a1a1a;
-            border: 1px solid #332a21;
+            border: 1px solid #332a21; /* 香檳金絲線邊框 */
             padding: 40px 20px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
@@ -101,7 +85,7 @@
             font-size: 22px;
             font-weight: 300;
             letter-spacing: 5px;
-            color: #d4af37;
+            color: #d4af37; /* 法式香檳金 */
             margin: 0 0 6px 0;
             text-transform: uppercase;
         }
@@ -119,13 +103,13 @@
             font-weight: 300;
         }
         .section-title {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 14px;
+            letter-spacing: 1px;
             color: #d4af37;
-            margin-bottom: 18px;
-            font-weight: 400;
+            margin-bottom: 24px;
+            font-weight: 500;
             text-align: center;
+            line-height: 1.5;
         }
         .demand-container {
             margin-bottom: 32px;
@@ -136,8 +120,8 @@
             border: 1px solid #333333;
             padding: 20px 16px;
             font-size: 14px;
-            letter-spacing: 1px;
-            color: #cccccc;
+            letter-spacing: 0.5px;
+            color: #e0deda;
             cursor: pointer;
             text-align: left;
             margin-bottom: 14px;
@@ -157,16 +141,16 @@
             right: 16px;
             top: 50%;
             transform: translateY(-50%);
-            color: #444444;
+            color: #555555;
         }
         .demand-card.active::after {
             color: #d4af37;
         }
         .demand-card span {
             display: block;
-            font-size: 11px;
-            color: #888888;
-            margin-top: 4px;
+            font-size: 11.5px;
+            color: #8c867e;
+            margin-top: 6px;
             letter-spacing: 0.5px;
         }
         #prescription-panel {
@@ -174,11 +158,16 @@
             border-top: 1px solid #332a21;
             margin-top: 36px;
             padding-top: 32px;
+            animation: fadeInGrace 0.5s ease forwards;
+        }
+        @keyframes fadeInGrace {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .why-box {
             background: #1e1914;
             border-left: 2px solid #d4af37;
-            padding: 16px;
+            padding: 18px 16px;
             font-size: 13.5px;
             color: #cccccc;
             margin-bottom: 24px;
@@ -200,13 +189,13 @@
             text-transform: uppercase;
         }
         .component-value {
-            font-size: 16px;
+            font-size: 15px;
             color: #ffffff;
             margin-bottom: 24px;
             letter-spacing: 1px;
         }
         .showcase-box {
-            background: #1a1a1a;
+            background: #191919;
             border: 1px solid #2b2b2b;
             padding: 24px 16px;
             text-align: center;
@@ -223,36 +212,16 @@
             font-size: 16px;
             font-weight: 500;
             color: #ffffff;
-            margin: 0 0 8px 0;
+            margin: 0;
             letter-spacing: 1px;
         }
-        .prod-price {
-            font-size: 15px;
-            color: #e0deda;
-            letter-spacing: 1px;
-        }
-        .prod-note {
-            font-size: 11px;
-            color: #777777;
-            margin-top: 10px;
-            letter-spacing: 0.5px;
-        }
-        .luxury-cta {
-            display: block;
-            width: 100%;
-            background: linear-gradient(135deg, #e5c060, #b18764);
-            color: #121212;
+        .footer-note {
             text-align: center;
-            text-decoration: none;
-            padding: 16px;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 28px;
-            box-shadow: 0 8px 24px rgba(177, 135, 100, 0.25);
-            cursor: pointer;
-            border: none;
+            font-size: 12px;
+            color: #666666;
+            margin-top: 36px;
+            letter-spacing: 1px;
+            font-style: italic;
         }
     </style>
 </head>
@@ -261,38 +230,51 @@
     <div class="luxury-wrapper">
         <div class="brand-header">
             <div class="brand-logo">Jourdeness Castle</div>
-            <div class="main-subtitle">佐登妮絲城堡 | 奢華高訂肌膚處方</div>
+            <div class="main-subtitle">佐登妮絲城堡 | 老客專屬肌膚危情自我核對</div>
             <div class="brand-divider"></div>
         </div>
 
-        <div class="section-title">請選擇您目前迫切需要被解決的肌膚核心渴望</div>
+        <!-- 3秒靈魂捕捉核心靈魂發問 -->
+        <div class="section-title">親愛的貴賓：妳每天擦的頂級保養品，<br>是否少了大牌沒說的『超導開關』？<br>妳的保養，是否遇到了吸收停滯期？</div>
+        
+        <!-- 4大老客最常遇到的保養盲區卡片 -->
         <div class="demand-container">
-            <button onclick="revealPrescription(this, 'aesthetic')" class="demand-card">
-                ✨ 醫美雷射術後急需高密度保濕
-                <span>特殊狀態：脆弱泛紅、絕不能碰酸、極需細胞自我修護</span>
+            <button onclick="revealPrescription(this, 'travel')" class="demand-card">
+                🥀 為什麼擦了萬元玫瑰霜，到了中午依然發黃卡紋？
+                <span>【保養停滯盲區】乾化角質像硬掉的絲瓜絡，大分子成分堆在皮表根本吃不進去。</span>
             </button>
-            <button onclick="revealPrescription(this, 'spots')" class="demand-card">
-                ⏳ 長年頑固老人斑、深層點狀曬斑
-                <span>歲月痕跡：一般的亮白無效、渴望精準標靶定點擊碎</span>
+            <button onclick="revealPrescription(this, 'ecosystem')" class="demand-card">
+                🌡️ 為什麼一吹冷氣臉皮就發燙刺痛、保養品集體翻車？
+                <span>【微生態盲區】皮膚城牆防禦系統癱瘓，盲目補水控油只是在「傷口上灑鹽」。</span>
             </button>
-            <button onclick="revealPrescription(this, 'sagging')" class="demand-card">
-                👑 熟齡面部輪廓鬆弛、深層垮臉乾紋
-                <span>頂級抗衰：拍照不再有底氣、底妝精準卡在法令紋</span>
+            <button onclick="revealPrescription(this, 'sculpt')" class="demand-card">
+                👑 為什麼自拍時的下顎線逐漸失控、法令紋拼命卡粉？
+                <span>【肌底坍塌盲區】地心引力讓底層鋼筋大斷裂，狂抹乳霜只是在塌陷的房頂補油漆。</span>
+            </button>
+            <button onclick="revealPrescription(this, 'shield')" class="demand-card">
+                🛡️ 為什麼剛做完醫美雷射或極端換季，皮膚越保濕越乾癟？
+                <span>【水桶漏水盲區】肌膚防護碎裂變成漏水水桶，狂澆玻尿酸只會加速水分蒸發、引發反黑。</span>
             </button>
         </div>
 
+        <!-- 絲滑展開正確知識與對應明星系列（純看、無任何點擊導購按鈕） -->
         <div id="prescription-panel">
-            <div class="section-title">城堡高級訂製對策</div>
+            <div class="section-title">城堡高訂修護講堂</div>
             
+            <!-- 科學比喻與導正觀念文案區 -->
             <div class="why-box" id="skin-why"></div>
 
-            <div class="component-meta">珍稀奢華核心成分</div>
+            <div class="component-meta">城堡高訂活性成分</div>
             <div class="component-value" id="component-name"></div>
 
+            <!-- 建議加購/升艙的城堡明星藝術品 -->
             <div class="showcase-box">
-                <div class="prod-label">佐登城堡限定珍萃系列</div>
+                <div class="prod-label">建議搭配之城堡珍萃放大器</div>
                 <h4 class="prod-title" id="prod-name"></h4>
-                <div class="prod-price" id="prod-price"></div>
-                <div class="prod-note">※ 本珍稀系列採限量配額，由城堡私人專櫃師一對一諮詢提供。</div>
             </div>
             
+            <!-- 大牌高奢純淨收尾 -->
+            <div class="footer-note">
+                並非所有保養品都能被稱為藝術品。傾聽肌膚的真實渴望，給予最正確的長期款待。<br>JOURDENESS CASTLE 伴您優雅續寫不老傳奇。
+            </div>
+        </div>
