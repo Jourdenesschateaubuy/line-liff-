@@ -56,7 +56,6 @@
             font-weight: 400;
             text-align: center;
         }
-        /* 需求卡片排版 */
         .demand-container {
             margin-bottom: 32px;
         }
@@ -74,6 +73,7 @@
             position: relative;
             transition: all 0.3s ease;
             line-height: 1.5;
+            display: block;
         }
         .demand-card:active, .demand-card.active {
             background: #2a241e;
@@ -98,19 +98,12 @@
             margin-top: 4px;
             letter-spacing: 0.5px;
         }
-        /* 處方便板 */
         #prescription-panel {
             display: none;
             border-top: 1px solid #332a21;
             margin-top: 36px;
             padding-top: 32px;
-            animation: fadeInGrace 0.5s ease forwards;
         }
-        @keyframes fadeInGrace {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* 科學解析區 */
         .why-box {
             background: #1e1914;
             border-left: 2px solid #d4af37;
@@ -141,7 +134,6 @@
             margin-bottom: 24px;
             letter-spacing: 1px;
         }
-        /* 產品展示 */
         .showcase-box {
             background: #1a1a1a;
             border: 1px solid #2b2b2b;
@@ -174,7 +166,6 @@
             margin-top: 10px;
             letter-spacing: 0.5px;
         }
-        /* LINE 客製化諮詢鈕 */
         .luxury-cta {
             display: block;
             width: 100%;
@@ -189,6 +180,8 @@
             text-transform: uppercase;
             margin-top: 28px;
             box-shadow: 0 8px 24px rgba(177, 135, 100, 0.25);
+            cursor: pointer;
+            border: none;
         }
     </style>
 </head>
@@ -201,7 +194,6 @@
             <div class="brand-divider"></div>
         </div>
 
-        <!-- 步驟一：選擇核心需求 -->
         <div class="section-title">請選擇您目前迫切需要被解決的肌膚核心渴望</div>
         <div class="demand-container">
             <button onclick="revealPrescription(this, 'aesthetic')" class="demand-card">
@@ -210,7 +202,7 @@
             </button>
             <button onclick="revealPrescription(this, 'spots')" class="demand-card">
                 ⏳ 長年頑固老人斑、深層點狀曬斑
-                <span>歲月痕跡：一般的亮白無效、渴望精準標靶定點擊碎</span>
+                <span>歲月痕跡：一般的亮白無效、渴望精專標靶定點擊碎</span>
             </button>
             <button onclick="revealPrescription(this, 'sagging')" class="demand-card">
                 👑 熟齡面部輪廓鬆弛、深層垮臉乾紋
@@ -218,7 +210,6 @@
             </button>
         </div>
 
-        <!-- 步驟二：展示頂級解方與大牌藝術分析 -->
         <div id="prescription-panel">
             <div class="section-title">城堡高級訂製對策</div>
             
@@ -234,16 +225,17 @@
                 <div class="prod-note">※ 本珍稀系列採限量配額，由城堡私人專櫃師一對一諮詢提供。</div>
             </div>
             
-            <!-- LINE 尊榮下單連結 -->
-            <a href="#" id="line-consult-btn" class="luxury-cta">與城堡私人專櫃師一對一諮詢下單</a>
+            <button onclick="redirectToLine()" class="luxury-cta">與城堡私人專櫃師一對一諮詢下單</button>
         </div>
     </div>
 
     <script>
-    // 請在此處填寫您佐登妮絲城堡 LINE 官方帳號的正確 ID (例如 @jd_castle)
-    var LINE_ACCOUNT_ID = "@jourdeness_castle"; 
+    // 💡 城堡官方帳號 LINE ID
+    var LINE_ID = "@jourdeness_castle"; 
 
-    // 奢華大牌導購資料庫：強調長期護膚藝術、術後修護與痛點對應
+    var currentMsg = ""; // 儲存當前點選的下單文字
+    var globalLineUrl = "";
+
     var database = {
         aesthetic: {
             why: "<b>為什麼您在此刻需要這款處方？</b><br>醫美雷射後的肌膚屏障處於極微創狀態，普通的玻尿酸保濕只能停留在表皮，無法修復底層。此時的肌膚極其脆弱，絕對不能接觸任何一絲酸類。這款處方能像為肌膚蓋上一座『無菌修護溫室』，提供極高濃度的龍血自我修復能耐，在底層阻斷水分蒸發、全面防止反黑危機。",
@@ -269,29 +261,40 @@
     };
 
     function revealPrescription(element, type) {
-        // 1. 切換點擊樣式
         var cards = document.querySelectorAll('.demand-card');
         for (var i = 0; i < cards.length; i++) {
             cards[i].classList.remove('active');
         }
         element.classList.add('active');
 
-        // 2. 顯示解方案板
         var panel = document.getElementById('prescription-panel');
         var selected = database[type];
 
-        // 3. 填入高端品牌文案與成分深度解析
         document.getElementById('skin-why').innerHTML = selected.why;
         document.getElementById('component-name').innerText = selected.comp;
         document.getElementById('prod-name').innerText = selected.prod;
         document.getElementById('prod-price').innerHTML = selected.price;
 
-        // 4. 自動生成客製化 LINE 導流網址（直接填入對白）
-        var encodedMsg = encodeURIComponent(selected.msg);
-        var lineUrl = "https://line.me" + LINE_ACCOUNT_ID + "/?" + encodedMsg;
-        document.getElementById('line-consult-btn').href = lineUrl;
+        // 紀錄目前的發送訊息
+        currentMsg = selected.msg;
+        globalLineUrl = "https://line.me" + LINE_ID + "/?" + encodeURIComponent(currentMsg);
 
         panel.style.display = 'block';
 
-        // 5. 手機平滑微滾動
         setTimeout(function() {
+            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
+
+    function redirectToLine() {
+        // 偵測是否在智慧型手機/行動裝置環境
+        var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        
+        if (isMobile) {
+            // 手機端正常跳轉到 LINE
+            window.location.href = globalLineUrl;
+            setTimeout(function() {
+                window.location.href = "https://line.me" + LINE_ID;
+            }, 500);
+        } else {
+            // 💻 電腦網頁測試端：彈出奢華通知，展示預期文字
