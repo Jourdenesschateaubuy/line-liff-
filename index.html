@@ -2,180 +2,57 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JOURDENESS CASTLE | 城堡珍稀高訂肌膚黃金配方</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOURDENESS CASTLE</title>
+    <style>
+        body { background-color: #121212; color: #ffffff; font-family: sans-serif; padding: 20px; text-align: center; }
+        .wrapper { max-width: 400px; margin: 0 auto; background: #1a1a1a; border: 1px solid #332a21; padding: 20px; }
+        h2 { color: #d4af37; font-size: 20px; margin-bottom: 20px; }
+        .btn { width: 100%; background: #222222; border: 1px solid #333333; color: #ffffff; padding: 15px; margin-bottom: 10px; cursor: pointer; text-align: left; display: block; font-size: 14px; }
+        .btn:active { background: #2a241e; border-color: #d4af37; }
+        #panel { display: none; margin-top: 20px; padding: 15px; background: #1e1914; border-left: 2px solid #d4af37; text-align: left; }
+        .comp { color: #d4af37; font-weight: bold; margin-top: 10px; }
+    </style>
     <script>
-    var LINE_ID = "@jourdeness_castle"; 
-
-    // 💡 城堡 10 大經典系列資料庫（已全面換成 100% 安全的一線大廠穩定 CDN 圖片網址，絕不死鎖）
     var database = {
-        platinum: {
-            title: "💎 鉑金無痕煥白雙導精華",
-            target: "精準鎖定：細紋與黑斑雙重夾擊、臉色老態蠟黃、保養進入死胡同",
-            why: "熟齡肌最害怕的，就是『細紋和黑斑同時在臉上炸開』。一般的保養品，抗老就不能美白，美白又容易太刺激，分開擦兩三瓶，反而加重脆弱肌底的負擔。如果肌底吸收力停滯，擦再多也是堆在皮表白忙一場！這款雙導精華在科學上是肌底的『雙向防禦織網』。它採用奢華的鉑金超導科技搭配物理雙管設計，一管精準狙擊黑色素防反黑，一管注入複合抗皺胜肽。擠出的那一秒兩者完美融合，像雙向編織的隱形鋼絲防護網，一邊撫平頑固褶皺，一邊在底層截斷暗沉訊號。這不是多擦一瓶精華，是幫妳的肌膚做一場一對一的高訂微雕藝術。",
-            comp: "頂級白金級超導微分子 × 雙管標靶煥白撫紋因子",
-            prod: "鉑金無痕煥白雙導精華（細紋與暗沉的終極克星）",
-            img: "https://unsplash.com"
-        },
-        travel: {
-            title: "🥀 玫瑰超微晶萃系列",
-            target: "精準鎖定：中午膚色發灰、保養遇到瓶頸、底妝乾紋卡粉",
-            why: "熟齡肌最常面臨『中午過後膚色暗沉發灰』的尷尬。許多貴賓遇到這種乾癟，會慌張地去買更厚、更濃稠的精華油。但真相是：老化的皮膚表面就像一塊曬乾、變硬的絲瓜絡，吸收通道早已卡死。分子巨大的普通玫瑰油只會堆在表面氧化變黃！佐登專利 NanoTOBI 技術，將頂級玫瑰精粹縮小成無數個『微米超導膠囊』，像穿牆彈一樣穿透僵硬角質，2.3倍直攻肌底，重新通開吸收開關。這不是多擦一瓶保養品，是幫妳化妝桌上的乳霜裝上極致放大器。",
-            comp: "四國富硒玫瑰精粹 × NanoTOBI 專利微米超導膠囊技術",
-            prod: "玫瑰超微晶萃瞬效霜（老客必備保養放大器）",
-            img: "https://unsplash.com"
-        },
-        ecosystem: {
-            title: "🧪 INSK 乳酸平衡系列",
-            target: "精準鎖定：吹冷氣或換季臉皮莫名發燙刺痛、大泛紅粗糙",
-            why: "每逢換季或長時間待在強效冷氣房，臉皮就莫名發燙、刺痛、冒出粗糙微小顆粒？這其實是因為妳肌膚表面的『菌群生態崩潰了』。當好菌流失，壞菌瘋狂佔領毛孔，妳的肌膚屏障就像防禦系統徹底癱瘓、門戶大開的城牆。這時妳擦再貴的乳霜，都會被壞菌啃食並引發慢性發炎，導致越保養越脆弱！INSK 乳酸平衡系列每 1mL 蘊含 3500萬個益菌萃取，一擦下去，就像直接往癱瘓城牆上『空降精銳的好菌自衛隊』。好菌瞬間壓制壞菌、搶回地盤並收復生態保護傘，為妳後續的抗老精品穩穩護航開路。",
-            comp: "益菌金三角微生態因子 (比菲德氏菌/乳酸桿菌/釀酒酵母)",
-            prod: "INSK 乳酸平衡水嫩膜（敏感期的肌膚安全避難所）",
-            img: "https://unsplash.com"
-        },
-        sculpt: {
-            title: "👑 肌光緊緻抗衰系列",
-            target: "精準鎖定：下顎線鬆垮鬆弛、微笑時法令紋深層卡粉",
-            why: "拍合照頭稍微低一點下顎線就消失？一微笑底妝就精準卡在深深的法令紋裡？這代表肌底正在『慢性塌陷』。如果把皮膚比喻成一棟房子，水分和乳霜只是表面的油漆，而彈力纖維則是水泥內部的鋼筋。當底層的鋼筋（彈力網）因為年齡而斷裂、大塌陷時，妳在房頂刷再厚、再貴的精美油漆（乳霜），輪廓線依然會照樣塌給妳看！肌光緊緻系列利用高訂微分子胜肽，能直接穿透皮表，化身為無數條隱形生物鋼絲，網狀牽引、死死拉住下垂的輪廓線，並同時進行底層水泥灌漿，把法令紋與凹陷從最深處垂直往上撐起。",
-            comp: "高活性藍銅胜肽精粹 × 智慧逆齡網狀複合胜肽",
-            prod: "肌光緊緻速妍霜（肌底線雕級鋼絲工程）",
-            img: "https://unsplash.com"
+        rose: {
+            why: "熟齡肌最常面臨『中午過後膚色暗沉發灰』的尷尬。真相是：老化的皮膚表面就像一塊曬乾、變硬的絲瓜絡，吸收通道早已卡死。分子巨大的普通玫瑰油只會堆在表面氧化變黃！佐登專利 NanoTOBI 技術，將頂級玫瑰精粹縮小成無數個『微米超導膠囊』，像穿牆彈一樣穿透僵硬角質，2.3倍直攻肌底，重新通開吸收開關。這不是多擦一瓶保養品，是幫妳化妝桌上的乳霜裝上極致放大器。",
+            comp: "四國富硒玫瑰精粹 × NanoTOBI 專利技術",
+            prod: "玫瑰超微晶萃系列"
         },
         shield: {
-            title: "🛡️ 龍血求麗修護系列",
-            target: "精準鎖定：醫美雷射術後乾燥發燙、換季大脫屑害怕反黑",
             why: "不論是換季大脫屑，還是剛做完皮秒、電音波醫美，微創期的肌膚乾到像要裂開。這時候盲目狂灌玻尿酸（補水），皮膚就像一個底部破了無數大洞的漏水水桶。水分倒進去立馬蒸發，還會物理性地把肌底僅存的微量水分一起帶走，導致『越保濕越乾癟』，甚至誤擦含有化學酸類/香精的普通保養品而發炎反黑！這款處方中，玻尿酸負責加水，而秘魯龍血則是扮演水桶的防水補丁。它在科學本質上是『液態無菌防護罩』，一抹下去就像把脆弱的植物放進無菌溫室，安撫發燙泛紅，把水分死死鎖在基底，為妳昂貴的醫美效果與奢華保養買一份終極保險。",
-            comp: "頂級秘魯龍血超導活性精純物 × 瞬效爆水小分子玻尿酸",
-            prod: "龍血求麗修護系列（醫美效果的終極防護網）",
-            img: "https://unsplash.com" 
-        },
-        spots: {
-            title: "✨ 白金密集煥白淡斑筆",
-            target: "精準鎖定：長年頑固黑斑曬斑、拒絕全臉美白越擦越顯斑",
-            why: "長了頑固黑斑，以為全臉美白就能淡化？這其實是錯誤的。全臉美白只能代謝表皮。幕後沉澱的老人斑與曬斑是由於基底層黑色素母細胞長期堆積。如果一味全臉美白，健康的皮膚變白了，反而會讓原本深層的那塊黑斑看起來更黑、更突兀！這款淡斑筆在科學上是肌膚的高訂去漬筆。它利用白金級煥白成分的『靶向狙擊技術』，不需要大面積塗抹，而是專門深入卡住黑色素的微小地方，像橡皮擦一樣定點、定速去解構長年陳年色斑，重回360度精緻無瑕。",
-            comp: "白金級密集煥白標靶精粹 × 局部定點導滲因子",
-            prod: "白金密集煥白淡斑筆（局部瑕疵之微雕藝術品）",
-            img: "https://unsplash.com"
-        },
-        ba5: {
-            title: "💎 BA-5 肌密抗皺系列",
-            target: "精準鎖定：定格靜態深紋、肌底失去彈性硬化乾癟",
-            why: "35歲之後，肌膚細胞不僅流失膠原蛋白，更在經歷『膠原醣化硬化』。健康的細胞本該像軟乳酪，而醣化後的細胞就像被高溫烤乾的焦糖硬餅乾！這時妳的肌底完全脆化，在硬餅乾表面狂塗保濕或胜肽，硬化細胞根本無法吸收，紋路依然死死定格！專利 BA-5 肌密胜肽在科學上是肌底細胞的頂級解凍劑。它能像溫和的融化劑般去解構、軟化像硬餅乾一樣卡死的醣化變性細胞，讓肌底重新恢復軟乳酪般的彈性空間，再由內而外將定格的靜態深紋垂直推平。",
-            comp: "專利 BA-5 肌密胜肽複合因子 × 膠原重塑對抗因子",
-            prod: "BA-5 肌密抗皺活妍霜（細胞級的重塑時光藝術）",
-            img: "https://unsplash.com"
-        },
-        aqua: {
-            title: "💦 水光肌系列",
-            target: "精準鎖定：洗臉後迅速乾癟、蘋果肌凹陷失去澎潤光澤",
-            why: "老客人最常面臨洗完臉後，皮膚在5分鐘內迅速乾癟、暗淡無光的慢性斷水危機。盲目敷普通面膜或堆疊厚重乳霜，只停留在表面，完全救不了深層！角質層此時的細胞就像被曬乾、起皺、失去折射力的『葡萄乾』！水光肌系列在科學上是肌底細胞的高壓注水幫浦。它能穿透皮表，將高密度爆水養分像高壓水槍般直接灌進乾癟的葡萄乾細胞中，讓漸們重新膨脹、充盈，變回晶瑩透亮的『新鮮紫葡萄』！由內而外撐起蘋果肌，折射出頂級專櫃推崇的自發光透明水潤感。",
-            comp: "微分子高壓注水複合因子 × 鎖水玻尿酸網膜科技",
-            prod: "水光肌精華晚霜（細胞級的爆水膨彈藝術品）",
-            img: "https://unsplash.com"
-        },
-        snow: {
-            title: "❄️ 晶淬雪系列",
-            target: "精準鎖定：全臉暗沉蠟黃不均、曬後迅速黑化難以白回",
-            why: "曬後皮膚迅速變黑，或是長年甩不掉疲憊蠟黃？盲目用強效酸類或暴力去角質想搓掉黑色素，只會嚴重破壞皮脂膜，逼得底層細胞啟動防禦大發炎，引發更嚴重的報復性反黑！晶淬雪系列在科學上是肌底黑化訊號的終極阻斷剪刀。它不傷害脆弱表皮，而是像最精準的拆彈專家直接深入基底層，啪地一聲，直接剪斷黑色素母細胞的『黑化訊號傳導線』！讓底層大響的警報器瞬間關閉、停止生產色素，由內而外優雅還原出如城堡白大理石般的澄淨、通透貴婦白皙感。",
-            comp: "高白修復阻斷因子 × 植物亮白澄淨精粹",
-            prod: "晶淬雪潤白乳（源頭截斷的澄淨調養藝術品）",
-            img: "https://unsplash.com"
-        },
-        exo: {
-            title: "🌌 Exo-雙粹秘泌凍晶組",
-            target: "精準鎖定：斷崖式急速衰老、面部膠原大面積坍塌、細胞失去自主修復力",
-            why: "熟齡肌最怕突然迎來垮臉。盲目擦萬元植物乳霜沒用，因為老化的核心真相是妳底層細胞之間的『通訊兵全體陣亡了』！通訊卡死，細胞陷入沉睡，妳在外面塗再厚，底層細胞也聽不見指令。妳需要的是高科技細胞傳話兵與急凍時空太空艙技術。外泌體分子極小，能像幽靈般穿透直達基底，像奈米廣播器敲開每扇沉睡細胞的大門，發出命令：『全體集合，立刻重組彈力網！』搭配零下40度真空急凍太空艙技術，在活性最巔峰那一秒抽乾水分封存冬眠，拍在臉上的那一刻，是它甦醒的第一秒，這才是細胞級的重塑時光藝術。",
-            comp: "高活性奈米級外泌體 (Exosome) × 航太級零下40度真空凍晶",
-            prod: "Exo-雙粹秘泌凍晶組（生醫級跨時空細胞重塑大師）",
-            img: "https://unsplash.com"
+            comp: "頂級秘魯龍血超導活性 × 瞬效爆水玻尿酸",
+            prod: "龍血求麗修護系列"
         }
     };
 
-    function revealPrescription(element, type) {
-        if (!database[type]) return;
-        var selected = database[type];
-
-        var panel = document.getElementById('prescription-panel');
-        var resTitle = document.getElementById('res-title');
-        var resTarget = document.getElementById('res-target');
-        var skinWhy = document.getElementById('skin-why');
-        var compName = document.getElementById('component-name');
-        var prodName = document.getElementById('prod-name');
-        var imgTag = document.getElementById('prod-img-tag');
-
-        if (!panel || !resTitle || !resTarget || !skinWhy || !compName || !prodName || !imgTag) return;
-
-        var cards = document.querySelectorAll('.demand-card');
-        for (var i = 0; i < cards.length; i++) { cards[i].classList.remove('active'); }
-        element.classList.add('active');
-
-        resTitle.innerText = selected.title;
-        resTarget.innerText = selected.target;
-        skinWhy.innerHTML = selected.why;
-        compName.innerText = selected.comp;
-        prodName.innerText = selected.prod;
-        imgTag.src = selected.img;
-
+    function checkSkin(type) {
+        var panel = document.getElementById('panel');
+        var text = document.getElementById('info');
+        var comp = document.getElementById('comp');
+        if (!panel || !text || !comp) return;
+        
+        text.innerHTML = database[type].why;
+        comp.innerText = "🌟 城堡高訂核心成分：" + database[type].comp;
         panel.style.display = 'block';
-
-        setTimeout(function() { panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
     }
     </script>
+</head>
+<body>
 
-    <style>
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body {
-            background-color: #121212;
-            margin: 0;
-            padding: 24px 16px;
-            font-family: sans-serif;
-            color: #ffffff;
-            line-height: 1.6;
-        }
-        .luxury-wrapper {
-            max-width: 440px;
-            margin: 0 auto;
-            background: #1a1a1a;
-            border: 1px solid #332a21;
-            padding: 40px 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-        }
-        .brand-header { text-align: center; margin-bottom: 36px; }
-        .brand-logo { font-size: 22px; color: #d4af37; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 5px; }
-        .brand-divider { width: 30px; height: 1px; background: #d4af37; margin: 14px auto; }
-        .main-subtitle { font-size: 13px; color: #999999; }
-        .section-title { font-size: 14px; color: #d4af37; margin-bottom: 24px; text-align: center; }
-        .demand-container { margin-bottom: 32px; }
-        .demand-card {
-            width: 100%;
-            background: #222222;
-            border: 1px solid #333333;
-            padding: 20px 16px;
-            font-size: 15px;
-            color: #ffffff;
-            font-weight: 600;
-            cursor: pointer;
-            text-align: left;
-            margin-bottom: 14px;
-            position: relative;
-            display: block;
-        }
-        .demand-card:active, .demand-card.active { background: #2a241e; border-color: #d4af37; }
-        .demand-card::after { content: '→'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: #d4af37; }
-        .demand-card span { display: block; font-size: 11.5px; color: #b0a99f; margin-top: 6px; }
-        #prescription-panel { display: none; border-top: 1px solid #332a21; margin-top: 36px; padding-top: 32px; }
-        .why-box { background: #1e1914; border-left: 2px solid #d4af37; padding: 18px 16px; font-size: 13.5px; color: #cccccc; margin-bottom: 24px; text-align: justify; }
-        .why-box b { color: #d4af37; display: block; margin-bottom: 6px; }
-        .component-meta { font-size: 11px; color: #888888; margin-bottom: 6px; text-transform: uppercase; }
-        .component-value { font-size: 15px; color: #ffffff; margin-bottom: 24px; }
-        .showcase-box { background: #191919; border: 1px solid #2b2b2b; padding: 24px 16px; text-align: center; }
-        .luxury-img-wrapper {
-            width: 160px;
-            height: 160px;
-            margin: 0 auto 16px auto;
-            background: #ffffff;
-            border: 1px solid #332a21;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
+    <div class="wrapper">
+        <h2>Jourdeness Castle<br><span style="font-size:12px; color:#999;">城堡高訂系列與肌膚危情自檢</span></h2>
+        <p style="font-size:13px; color:#ccc; margin-bottom:20px;">點擊下方經典系列，鑑賞妳的肌膚黃金配方</p>
+        
+        <button class="btn" onclick="checkSkin('rose')">🥀 玫瑰超微晶萃系列<br><span style="font-size:11px; color:#888;">解決問題：中午膚色發灰暗沉、底妝卡粉</span></button>
+        <button class="btn" onclick="checkSkin('shield')">🛡️ 龍血求麗修護系列<br><span style="font-size:11px; color:#888;">解決問題：醫美術後乾燥、換季極端脫屑</span></button>
+
+        <div id="panel">
+            <p id="info" style="font-size:13.5px; color:#eee; margin:0;"></p>
+            <div id="comp" class="comp"></div>
+        </div>
+    </div>
+
+</body>
+</html>
